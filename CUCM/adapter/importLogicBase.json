@@ -1,0 +1,22 @@
+{
+  "PhoneNtp": [{"description": "%"}, {"ipAddress": ""}, "phoneNtp", "ipAddress"],
+  "PhoneSecurityProfile": [{"name": "%"}, {"name": ""}, "phoneSecurityProfile", "name"],
+  "SipTrunkSecurityProfile": [{"name": "%"}, {"name": ""}, "sipTrunkSecurityProfile", "name"],
+  "PhysicalLocation": [{"name": "%"}, {"name": ""}, "physicalLocation", "name"],
+  "AudioCodecPreferenceList": [{"name": "%"}, {"name": ""}, "audioCodecPreferenceList", "name"],
+  "ApplicationDialRules": [{"name": "%"}, {"name": ""}, "applicationDialRules", "name"],
+  "TimePeriod": [{"name": "%"}, {"name": ""}, "timePeriod", "name"],
+  "AarGroup": [{"name": "%"}, {"name": ""}, "aarGroup", "name"],
+  "SipDialRules": [{"name": "%"}, {"name": ""}, "sipDialRules", "name"],
+  "UcService": [{"name": "%"}, {"name": ""}, "ucService", "name"],
+  "SoftKeyTemplate": [{"name": "%"}, {"name": ""}, "softKeyTemplate", "name"],
+  "IpPhoneServices": [{"serviceName": "%"}, {"serviceName": ""}, "ipPhoneServices", "serviceName"],
+  "PhoneButtonTemplate": [{"name": "%"}, {"name": ""}, "phoneButtonTemplate", "name"],
+  "SIPNormalizationScript": [{"name": "%"}, {"name": ""}, "sIPNormalizationScript", "name"],
+  "DateTimeGroup": [{"name": "%"}, {"name": ""}, "dateTimeGroup", "name"],
+  "Region": [{"name": "%"}, {"name": ""}, "region", "name", ["relatedRegions"]],
+  "TimeSchedule": [{"name": "%"}, {"name": ""}, "timeSchedule", "name"],
+  "ServiceProfile": [{"name": "%"}, {"name": ""}, "serviceProfile", "name"],
+  "CommonPhoneConfig": [{"name": "%"}, {"name": ""}, "commonPhoneConfig", "name"],
+  "DefaultDeviceProfile": [{"name": "%"}, {"name": ""}, "defaultDeviceProfile", "name"]
+  }

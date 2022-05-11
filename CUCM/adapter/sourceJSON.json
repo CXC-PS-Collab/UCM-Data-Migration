@@ -1,0 +1,64 @@
+{
+    "sourceCUCM": "172.27.207.20",
+    "username": "absciscoadmin",
+    "password": "Cisco@123",
+    "version": "11.5",
+    "siteCode": "IMT0168",
+    "userPassword": "abs12345!",
+    "FORWARD_ALL_CSS_CHANGE": false,
+    "FORWARD_ALL_CSS_NAME": "Call-Forward-PSTN_CSS",
+    "MODIFY_CSS": false,
+    "MODIFY_VM_PILOT": true,
+    "SITE_DESCRIPTION_FILTER": "",
+    "CMG_CHANGE": false,
+    "dataFilterJSONKeys": [
+        "2454",
+        "2455",
+        "2456",
+        "2457",
+        "2600",
+        "2605",
+        "2606",
+        "2607",
+        "2620",
+        "2621",
+        "2434",
+        "2436",
+        "2442",
+        "2501",
+        "2502",
+        "2508",
+        "2513",
+        "2514",
+        "2515",
+        "2761",
+        "0599",
+        "3203"
+    ],
+    "RETAIL_PARTITION_CHANGE": false,
+    "RETAIL_MIGRATION": true,
+    "NAMECHANGE": true,
+    "MULTI_PROCESSING": true,
+    "WORKERS": 3,
+    "PT_DATE": "Jan30",
+    "iCastConfigsParameters": {
+        "CSSList": [
+            "ICast-LPI_CSS",
+            "ICast-System_CSS"
+        ],
+        "callParkPattern": [
+            "20X",
+            "20[1-9]"
+        ],
+        "SiteMRGList": [
+            "ICast_MRGL"
+        ],
+        "DevicePoolList": [
+            "ICast21_DP",
+            "ICast_DP",
+            "CTI_DP",
+            "CTI12_DP",
+            "CTI24_DP"
+        ]
+    }
+}

@@ -1,0 +1,364 @@
+{
+  "Partitions": {
+    "file": "partition.json",
+    "axlMethod": "add_partition",
+    "headersToRemove": [
+      "dialPlanWizardGenId"
+    ],
+    "output": "name"
+  },
+  "css": {
+    "file": "css.json",
+    "axlMethod": "add_calling_search_space",
+    "headersToRemove": [
+      "clause",
+      "dialPlanWizardGenId"
+    ],
+    "output": "name"
+  },
+  "Locations": {
+    "file": "location.json",
+    "axlMethod": "add_location",
+    "headersToRemove": [
+      "id"
+    ],
+    "output": "name"
+  },
+  "CallingPartyXform": {
+    "file": "callingPartyXform.json",
+    "axlMethod": "add_calling_party_xform",
+    "headersToRemove": [
+    ],
+    "output": "pattern"
+  },
+  "CalledPartyXform": {
+    "file": "calledPartyXform.json",
+    "axlMethod": "add_called_party_xform",
+    "headersToRemove": [
+    ],
+    "output": "pattern"
+  },
+  "CallPark": {
+    "file": "callpark.json",
+    "axlMethod": "add_callpark",
+    "headersToRemove": [],
+    "output": "pattern"
+  },
+  "Directed Call Park": {
+    "file": "directedcallpark.json",
+    "axlMethod": "add_directedcallpark",
+    "headersToRemove": [],
+    "output": "pattern"
+  },
+  "Intercom Partition": {
+    "file": "intercomroutepartition.json",
+    "axlMethod": "add_partition",
+    "headersToRemove": [
+      "dialPlanWizardGenId"
+    ],
+    "output": "name"
+  },
+  "Intercom CSS": {
+    "file": "intercomcss.json",
+    "axlMethod": "add_calling_search_space",
+    "headersToRemove": [
+      "clause",
+      "dialPlanWizardGenId"
+    ],
+    "output": "name"
+  },
+  "Voicemail Pilot": {
+    "file": "voicemailpilot.json",
+    "axlMethod": "add_voicemailpilot",
+    "headersToRemove": [],
+    "output": "dirn"
+  },
+  "Voicemail Profile": {
+    "file": "voicemailprofile.json",
+    "axlMethod": "add_voicemailprofile",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "Directory Numbers": {
+    "file": "directorynumber.json",
+    "axlMethod": "add_directory_number",
+    "headersToRemove": [
+      "associatedDevices",
+      "confidentialAccess",
+      "defaultActivatedDeviceName",
+      "directoryURIs"
+    ],
+    "output": "pattern"
+  },
+  "SRST References": {
+    "file": "srst.json",
+    "axlMethod": "add_srst",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "MRGLs": {
+    "file": "mediaresourcegrouplist.json",
+    "axlMethod": "add_media_resource_group_list",
+    "headersToRemove": [
+      "clause"
+    ],
+    "output": "name"
+  },
+  "Translation Pattern": {
+    "file": "translationpattern.json",
+    "axlMethod": "add_translation",
+    "headersToRemove": [],
+    "output": "pattern"
+  },
+   "Device Pool": {
+    "file": "devicepool.json",
+    "axlMethod": "add_device_pool",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "Universal Line Template": {
+    "file": "universalLineTemplate.json",
+    "axlMethod": "add_universal_line_template",
+    "headersToRemove": [
+    "confidentialAccess"
+    ],
+    "output": "name"
+  },
+  "Universal Device Template": {
+    "file": "universalDeviceTemplate.json",
+    "axlMethod": "add_universal_device_template",
+    "headersToRemove": [
+      "confidentialAccess"
+    ],
+    "output": "name"
+  },
+  "User Profile": {
+    "file": "userprofile.json",
+    "axlMethod": "add_user_profile_provision",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "Users": {
+    "file": "user.json",
+    "axlMethod": "add_user_advance",
+    "headersToRemove": ["primaryExtension","associatedDevices",
+    "extensionsInfo"],
+    "output": "userid"
+  },
+  "Remote Destination Profile": {
+    "file": "remoteDestinationProfile.json",
+    "axlMethod": "add_remote_destination_profile",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "Remote Destination": {
+    "file": "remoteDestination.json",
+    "axlMethod": "add_remote_destination",
+    "headersToRemove": ["todAccessName"],
+    "output": "destination"
+  },
+   "Device Profile": {
+    "file": "deviceprofile.json",
+    "axlMethod": "add_device_profile_advance",
+    "headersToRemove": [["lines","line","associatedEndusers"],"loginUserId"],
+    "output": "name"
+  },
+  "Gateways": {
+    "file": "gateways.json",
+    "axlMethod": "add_gateway",
+    "headersToRemove": [],
+    "output": "domainName"
+  },
+  "Gateway Ports": {
+    "file": "gatewayports.json",
+    "axlMethod": "add_gateway_analog_port",
+    "headersToRemove": [],
+    "exception": true,
+    "output": "domainName"
+  },
+  "Route Group": {
+    "file": "routegroup.json",
+    "axlMethod": "add_route_group",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "Route List": {
+    "file": "routelist.json",
+    "axlMethod": "add_route_list",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "Route Pattern": {
+    "file": "routepattern.json",
+    "axlMethod": "add_route_pattern",
+    "headersToRemove": [
+      "isdnNsfInfoElement"
+    ],
+    "output": "pattern"
+  },
+  "MTPS": {
+    "file": "mtp.json",
+    "axlMethod": "add_mtp",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "Transcoders": {
+    "file": "transcoder.json",
+    "axlMethod": "add_transcoder",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "ConfBridge": {
+    "file": "hcnf.json",
+    "axlMethod": "add_conference_bridge",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "MRG": {
+    "file": "mediaresourcegroup.json",
+    "axlMethod": "add_media_resource_group",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "Update MRGLs": {
+    "file": "mediaresourcegrouplist.json",
+    "axlMethod": "update_media_resource_group_list",
+    "headersToRemove": [
+      "clause"
+    ],
+    "exception": true,
+    "output": "name"
+  },
+  "Phones": {
+    "file": "phone.json",
+    "axlMethod": "add_phone",
+    "headersToRemove": [
+      "confidentialAccess",
+      "versionStamp"
+    ],
+    "output": "name"
+  },
+  "CTI Route Points": {
+    "file": "ctiroutepoint.json",
+    "axlMethod": "add_cti_route_point",
+    "headersToRemove": ["dialPlanWizardId",
+      "withinImmersiveKbits","withinVideoBandwidth","withinImmersiveKbits"],
+    "output": "name"
+  },
+  "CTI Ports": {
+    "file": "ctiPorts.json",
+    "axlMethod": "add_phone",
+    "headersToRemove": [
+      "confidentialAccess",
+      "versionStamp"
+    ],
+    "output": "name"
+  },
+  "Line Group": {
+    "file": "linegroup.json",
+    "axlMethod": "add_linegroup",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "Hunt List": {
+    "file": "huntlist.json",
+    "axlMethod": "add_huntlist",
+    "headersToRemove": [],
+    "output": "name"
+  },
+  "Hunt Pilot": {
+    "file": "huntpilot.json",
+    "axlMethod": "add_huntpilot",
+    "headersToRemove": [],
+    "output": "pattern"
+  },
+  "SIP Trunks": {
+    "file": "siptrunk.json",
+    "axlMethod": "add_sip_trunk",
+    "headersToRemove": [
+      "sigDigits",
+      "confidentialAccess"
+    ],
+    "output": "name"
+  },
+  "SIP Route Patterns": {
+    "file": "sipRoutePatterns.json",
+    "axlMethod": "add_sip_route_pattern",
+    "headersToRemove": [],
+    "output": "pattern"
+  },
+  "Update CTI RP": {
+    "file": "ctiroutepoint.json",
+    "axlMethod": "update_cti_route_point",
+    "headersToRemove": [],
+    "exception": true,
+    "output": "name"
+  },
+  "Update Devicepool": {
+    "file": "devicepool.json",
+    "axlMethod": "update_device_pool",
+    "headersToRemove": [],
+    "exception": true,
+    "output": "name"
+  },
+  "Change DN Partition": {
+    "file": "changepartition.csv",
+    "axlMethod": "update_line",
+    "headersToRemove": [],
+    "exception": true,
+    "output": "pattern"
+  },
+  "Update Phones": {
+    "file": "phone.json",
+    "axlMethod": "update_phone",
+    "headersToRemove": [
+      "confidentialAccess",
+      "versionStamp",
+      "certificateStatus",
+      "isDualMode",
+      "currentProfileName",
+      "model",
+      "protocolSide","protocol",
+      "roamingDevicePoolName",
+      "ctiid",
+      "numberOfButtons",
+      "class",
+      "product","loginUserId",
+      "loginDuration","currentConfig","loginTime","activationIDStatus"
+    ],
+    "exception": true,
+    "output": "name"
+  },
+  "Update Gateways": {
+    "file": "gateways.json",
+    "axlMethod": "update_gateway",
+    "headersToRemove": ["loadInformation","units",
+    "scratch"],
+    "exception": true,
+    "output": "domainName"
+  },
+  "Update Users": {
+    "file": "user.json",
+    "axlMethod": "update_users",
+    "headersToRemove": ["associatedRemoteDestinationProfiles","accountType",
+    "customUserFields", "authenticationType","password",
+    "status", "associatedCapfProfiles","associatedTodAccess","associatedHeadsets"],
+    "exception": true,
+    "output": "userid"
+  },
+  "Update Directory Number": {
+    "file": "directorynumber.json",
+    "axlMethod": "update_line",
+    "headersToRemove": [["callForwardAlternateParty", "forwardToVoiceMail"], "associatedDevices",
+      "confidentialAccess", "directoryURIs"],
+    "exception": true,
+    "output": "pattern"
+  },
+  "Update CSS": {
+    "file": "css.json",
+    "axlMethod": "update_calling_search_space",
+    "headersToRemove": ["partitionUsage","clause","dialPlanWizardGenId"],
+    "exception": true,
+    "output": "name"
+  }
+}
