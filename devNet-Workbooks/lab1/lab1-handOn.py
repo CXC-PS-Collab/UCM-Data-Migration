@@ -1,5 +1,3 @@
-from ctypes.wintypes import RGB
-from doctest import script_from_examples
 import json
 import os
 from zeep.exceptions import Fault
@@ -8,6 +6,8 @@ import traceback
 from ciscoaxl import axl
 from common.baseFunctions import *
 from common.importLogic import updateConfigs
+
+
 
 sourceJsonFile=f"../inputs/sourceCluster.json"
 dataFilterFile=f"getDataFilter.json"
@@ -48,10 +48,8 @@ def generate_config_patterns():
     ## Generate the datafilter JSON Content
     for site in sourceClusterInputJson['siteCode']:
         siteSpecificdataFilterDict = {
-            "routePatternPartition": [
-                f"{site}_911_PT",
-                f"{site}_International_PT"
-                f"{site}_national_PT"
+            "CSSList": [
+                f"{site}_CSS"
             ]
         }
 
@@ -69,70 +67,51 @@ def generate_config_patterns():
 def SiteDataExport(directory, siteDataFilterContent):
     # Flag = True
 
-    routePatternPartition = (
-        siteDataFilterContent["routePatternPartition"]
-        if "routePatternPartition" in siteDataFilterContent.keys()
+    CSSList = (
+        siteDataFilterContent["CSSList"]
+        if "CSSList" in siteDataFilterContent.keys()
         else []
     )
 
-    ## ROUTE PATTERNS, ROUTE LIST, ROUTE GROUP
-    allRoutePatterns = []
-    corrRouteList = []
-    corrRouteGroup = []
+    #Partition List
+    PartitionList = (
+        siteDataFilterContent["partitionName"]
+        if "partitionName" in siteDataFilterContent.keys()
+        else []
+    )
 
-    for rpt in routePatternPartition:
-        try:
-            rptResults = ucm_source.get_route_patterns(
-                SearchCriteria={"routePartitionName": rpt}
-            )
-        except Exception as e:
-            print(e)
-        else:
-            if rptResults == None:
-                continue
-            elif type(rptResults) == Fault:
-                continue
-            elif type(rptResults["routePattern"]) == list:
-                for patt in rptResults["routePattern"]:
-                    rpData = ucm_source.get_route_pattern(uuid=patt["uuid"])["return"][
-                        "routePattern"
-                    ]
-                    allRoutePatterns.append(rpData)
-                    if rpData["destination"]:
-                        if rpData["destination"]["routeListName"] != None:
-                            corrRouteList.append(
-                                rpData["destination"]["routeListName"]["_value_1"]
-                            )
-                        else:
-                            corrRouteList.append(
-                                rpData["destination"]["gatewayName"]["_value_1"]
-                            )
-    ## Route List and corresponding Route Groups
-    for rl in set(corrRouteList):
-        rlFound = ucm_source.get_route_list(name=rl)
-        if type(rlFound) != Fault:
-            ## Extract respective members
-            data = rlFound["return"]["routeList"]
-            corrRouteList.append(data)
-            if data["members"] != None:
-                for mem in data["members"]["member"]:
-                    rgFound = ucm_source.get_route_group(
-                        name=mem["routeGroupName"]["_value_1"]
-                    )
-                    corrRouteGroup.append(rgFound["return"]["routeGroup"])
 
-    ## Write Results
-    write_results(directory, allRoutePatterns, "routepattern")
-    write_results(directory, allRouteList, "routelist")
-    write_results(directory, corrRouteGroup, "routegroup")
-    ## Collate Partition List
-    for rps in allRoutePatterns:
-        PartitionList.append(rps["routePartitionName"]["_value_1"])
+        # CSS
+    allCSS = []
+
+    for css in CSSList:
+        cssFound = ucm_source.get_calling_search_space(name=css)
+        if type(cssFound) != Fault:
+            cssdata = cssFound["return"]["css"]
+            allCSS.append(cssdata)
+            # Create Extended Partition List
+            if cssdata["clause"] and cssdata["clause"] != None:
+                cssParitions = cssdata["clause"].split(":")
+                PartitionList.extend(cssParitions)
+
+    # Write Results
+    write_results(directory, allCSS, "css")
+
+        # Partitions
+    allPartitions = []
+
+    for partition in set(PartitionList):
+        partitionFound = ucm_source.get_partition(name=partition)
+        if type(partitionFound) != Fault:
+            allPartitions.append(partitionFound["return"]["routePartition"])
+
+    # Write Results
+    write_results(directory, allPartitions, "partition")
 
     return True
 
 
-def export_RP_Dependencies():
+def export_CSS_Partition():
     """
     Step 2: use this function to export
     CSS and its dependent partitions.
@@ -158,7 +137,7 @@ def export_RP_Dependencies():
 
 
 
-def import_RP_Dependencies():
+def import_CSS_Partition():
     ## iterate over each site folder and push the configurations
     for site in sourceClusterInputJson['siteCode']:
         configDirectory = f"{configExportPath}/{site}"
@@ -173,7 +152,7 @@ def import_RP_Dependencies():
                 print("Invalid input. Existing..")
                 exit()
             else:
-                if userAccept.lower == "Y":
+                if userAccept == "Y":
                     try:
                         updateConfigs(configDirectory, ucm_destination,)
                     except Exception as importExe:
@@ -187,18 +166,11 @@ def import_RP_Dependencies():
                     exit()
 
 
-
-
 # Step 1
 generate_config_patterns()
 
 # Step 2
-export_CSS_Partition_with_modification()
+export_CSS_Partition()
 
 # Step 3
 import_CSS_Partition()
-
-
-partition: RP --> RL --> RG --> Run SIP Trunks as a script
-
-
