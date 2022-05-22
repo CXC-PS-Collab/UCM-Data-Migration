@@ -38,13 +38,14 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
 ### Logins & Credentials
 
 #### VPN Details
-> **VPN information**
+
 ◦ Address: `devnetsandbox-usw1-reservation.cisco.com:20244`
 ◦ Username: `sdmdev`
 ◦ Password: `VDCCLVXF` 
 
 #### CUCM Lab Details
 > **CUCM 11.5 IP (_Source Cluster_):**  10.10.20.15
+
 > **CUCM 12.5 IP (_Destination Cluster_)** 10.10.20.1 
 
 | Pod | Username | Password   | SiteCode |
@@ -57,10 +58,10 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
 | #6  | devnet06 | devnet@123 | POD6     |
 | #7  | devnet07 | devnet@123 | POD7     |
 | #8  | devnet08 | devnet@123 | POD8     |
-| #8  | devnet09 | devnet@123 | POD9     |
-| #8  | devnet10 | devnet@123 | POD10    |
-| #8  | devnet11 | devnet@123 | POD11    |
-| #8  | devnet12 | devnet@123 | POD12    |
+| #9  | devnet09 | devnet@123 | POD9     |
+| #10 | devnet10 | devnet@123 | POD10    |
+| #11 | devnet11 | devnet@123 | POD11    |
+| #12 | devnet12 | devnet@123 | POD12    |
 
 _Please access cucm with your own username/password and access data with your site code only._
 
@@ -156,6 +157,7 @@ Unpacking objects: 100% (86/86), 952.36 KiB | 2.36 MiB/s, done.
 
   > Activate Virtual Env
   *MAC*: `source env/bin/activate`
+
   *Windows*: `.\env\Scripts\activate`
 
 > **Task 0.5: Install Required Python Libraries**
@@ -200,22 +202,23 @@ python3 -m pip install -r requirements.txt
    |-- ************************************************************************
 ```
 
-> 🥁 **You're all set to workshop!**
+> 🥁 **You're all set to get started!**
 
 ---
 ## Session Workbooks
 
 > 😎 **Let's get some action...**
 
-- Head over to Session Workbooks present [here](link.com)
+- Head over to Session Workbooks present [here](https://github.com/shwetham09/UCM-Data-Migration/tree/workbooks/devNet-Workbooks)
 
 ---
 
 ## Help & Resources
 
-* Learn more about CUCM API's [here](https://www.splunk.com/en_us/training.html)
+* Learn more about CUCM API's [here](https://developer.cisco.com/docs/axl-developer-guide/)
+* Python Beginners Guide [here](https://www.w3schools.com/python/)
 * Join the DEVWKS-1016 Webex Teams space [here](https://eurl.io/)
-* Add your use-cases to the [PreemptiveOps Framework](https://github.com/) repo
+* Add your use-cases to the [UCM Migrations](https://github.com/shwetham09/UCM-Data-Migration/tree/workbooks#automating-ucm-migration) repo
 * Fancy a chat?
-    * [Aman Sardana](https://amansardana.in) - [Email](mailto:amasarda@cisco.com)
-    * [Saurabh Khaneja](https://github.com/sakhanej) - [Email](mailto:sakhanej@cisco.com)
+    * [Saurabh Khaneja](mailto:sakhanej@cisco.com)
+    * [Shwetha M](mailto:shwm@cisco.com)
