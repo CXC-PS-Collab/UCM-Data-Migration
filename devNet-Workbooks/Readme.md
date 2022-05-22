@@ -70,12 +70,16 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
 
 
 1. Read Input files:
-   1. sourceCluster.json: _This file provides details required to connect to source cluster_ 
-   2. destinationCluster: _This file provides details required to connect to destination cluster_
+   1. **sourceCluster.json**: _This file provides details required to connect to source cluster_ 
+   2. **destinationCluster.json**: _This file provides details required to connect to destination cluster_
+
+    > _Open and Read JSON Files into Python Dictionary
     ```python
-    json.load(open(abc.json)) ## open and read JSON file into python dictionary
+    json.load(open(abc.json))
     ```
-2. Create AXL objects to connec to Source and Destination
+
+2. Create AXL objects for Source and Destination cluster
+   
   ```python
   from ciscoaxl import axl
 
@@ -87,33 +91,39 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
   )
   ```
 3. Generate Configuration Patterns:
-   1. In order to pull site based CSS configurations, we must supply CSS names as filter parameter
-   2. In our lab, we have only 4 CSS per site, but in production, we can have multiple sites with same pattern
-   3. use `generate_config_patterns` function to dynamically create Input JSON. 
-   4. Post completion, run `generate_config_patterns` alone to create a `getDataFilter.json` file
+   1. We must supply CSS names as filter parameter to extract from Source Cluster
+   2. In our lab, we have 4 CSS per site, but in production, we can have multiple sites following same data pattern
+   3. Use `generate_config_patterns` func to dynamically create Input JSON. 
+   4. Post completion, run `generate_config_patterns` to create a `getDataFilter.json` file
+
+> _getDataFilter.json_: Contains list of all CSS that we need to export
 
 4. Export Configurations:
-   1. Now that we have our `getDataFilter.json` file, we now have list of all CSS that we need to import
-   2. Since, we need to export CSS and it's corresponding Partitions, head on to `SiteDataExport` func, to code CSS and Partition export logic
-   3. Make sure to halt and understand the response from: `get_calling_search_space` and `get_partition` method of AXL object.
-   4. Post completion, run `export_CSS_Partition` function to export configs from Source Cluster
+   1. Head on to `SiteDataExport` func, to code CSS and Partition export logic. 
+   2. Halt and understand the response from: `get_calling_search_space` and `get_partition` methods of AXL object.
+   3. Post completion, run `export_CSS_Partition` func to export configs from Source Cluster
       1. You would find a new folder getting created `ConfigExports`. This folder will contain:
-         1. css.json: Export of CSS Configs
-         2. partition.json: Export of Partition Configs
+         1. *css.json*: Export of CSS Configs
+         2. *partition.json*: Export of Partition Configs
 
 5. Import Configurations:
-   1. While importing configurations, we need to ensure, we follow the order i.e. Paritions before CSS.
-   2. In this lab, we have created this import logic dynamically following the import order:
-      1. `common/importLogic.json` : This JSON contains the import order of CUCM configs and AXL methods required to import configs
-      2. `common/importLogic.py`: This file contains the `updateConfigs` function which dynamicaly import configuration based on parameters defined in `importLogic.json` file
-   3. Head over to `import_CSS_Partition` function to import CSS and Partitions to destination cluster
+  > _While importing configs, we need to ensure import order is followed i.e. Paritions before CSS_
+
+   1. In this lab, we have created this import logic dynamically following the import order:
+      1. `common/importLogic.json`
+         1. This JSON contains the import order of CUCM configs and AXL methods required to import configs
+   
+      2. `common/importLogic.py`: 
+         1. This file contains the `updateConfigs` func which dynamicaly import configuration based on parameters defined in `importLogic.json` file
+   
+   2. Head on to `import_CSS_Partition` func to import CSS and Partitions to destination cluster
 
 6. Verify Configuration are imported properly by logging into destination CUCM. _This method can also be automated as extension to this script_
 
 
-> 🥁 **You have successfully completed Lab 1 of this workshop**
+> 🥁 **You have successfully completed Lab 1**
 
-> **_Head on to Lab 2 for more fun..._**
+> **_Head on to Lab 2 for some more fun..._**
 
 ## Lab 2: Route Pattern and dependencies
 
