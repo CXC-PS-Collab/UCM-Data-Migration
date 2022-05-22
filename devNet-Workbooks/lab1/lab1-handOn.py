@@ -8,64 +8,61 @@ from common.baseFunctions import *
 from common.importLogic import updateConfigs
 
 
-
+### Read Source and Destination Input JSON's
 sourceJsonFile=f"../inputs/sourceCluster.json"
-dataFilterFile=f"getDataFilter.json"
 destinationJsonFile=f"../inputs/destinationCluster.json"
+#sourceClusterInputJson = 
+#destinationClusterInputJson = 
+
+## Create Source AXL Object
+# ucm_axl_object_source = axl(
+#     username=,
+#     password=,
+#     cucm=,
+#     cucm_version=,
+# )
+
+## Create Destination AXL Object
+# ucm_axl_object_dest = axl(
+#     username=,
+#     password=,
+#     cucm=,
+#     cucm_version=,
+# )
+
+dataFilterFile=f"getDataFilter.json" ## output of generate config patterns
 configExportPath=f"./ConfigExports"
 
-
-## Reading Source File and Destination File
-sourceClusterInputJson = json.load(open(sourceJsonFile))
-destinationClusterInputJson = json.load(open(destinationJsonFile))
-## Creating Source AXL Object
-ucm_source = axl(
-    username=sourceClusterInputJson["username"],
-    password=sourceClusterInputJson["password"],
-    cucm=sourceClusterInputJson["cucm"],
-    cucm_version=sourceClusterInputJson["version"],
-)
-
-ucm_destination = axl(
-    username=destinationClusterInputJson["username"],
-    password=destinationClusterInputJson["password"],
-    cucm=destinationClusterInputJson["cucm"],
-    cucm_version=destinationClusterInputJson["version"],
-)
 # ## Sites to import from config Folder
 # Sites = destinationClusterInputJson["configsFolders"]
 
 
 def generate_config_patterns():
-    """
-    Step 1: use this function to dynamically 
-    create data that we need to extract from 
-    source cluster
-    """
 
-    ## Define an empty dictionary object to store all sites data
-    allSitesData = {}
-    ## Generate the datafilter JSON Content
-    for site in sourceClusterInputJson['siteCode']:
-        siteSpecificdataFilterDict = {
-            "CSSList": [
-                f"{site}_CSS"
-            ]
-        }
+    # ## Define an empty dictionary object to store all sites data
+    # allSitesData = {}
+    # ## Generate the datafilter JSON Content
+    # for site in sourceClusterInputJson['siteCode']:
+    #     siteSpecificdataFilterDict = {
+    #         "CSSList": [
+    #             f"{site}_CSS"
+    #         ]
+    #     }
 
-        allSitesData[site] = siteSpecificdataFilterDict
+    #     allSitesData[site] = siteSpecificdataFilterDict
 
-    # Serializing json
-    dataFilterDict_JSONobject = json.dumps(allSitesData, indent=4)
-    jsonFile = open(dataFilterFile, "w")
-    jsonFile.write(dataFilterDict_JSONobject)
+    # # Serializing json
+    # dataFilterDict_JSONobject = json.dumps(allSitesData, indent=4)
+    # jsonFile = open(dataFilterFile, "w")
+    # jsonFile.write(dataFilterDict_JSONobject)
 
-    ## Close JSON File
-    jsonFile.close()
+    # ## Close JSON File
+    # jsonFile.close()
+
+    return
 
 
 def SiteDataExport(directory, siteDataFilterContent):
-    # Flag = True
 
     CSSList = (
         siteDataFilterContent["CSSList"]
@@ -74,11 +71,7 @@ def SiteDataExport(directory, siteDataFilterContent):
     )
 
     #Partition List
-    PartitionList = (
-        siteDataFilterContent["partitionName"]
-        if "partitionName" in siteDataFilterContent.keys()
-        else []
-    )
+    PartitionList = []
 
 
         # CSS
@@ -86,13 +79,7 @@ def SiteDataExport(directory, siteDataFilterContent):
 
     for css in CSSList:
         cssFound = ucm_source.get_calling_search_space(name=css)
-        if type(cssFound) != Fault:
-            cssdata = cssFound["return"]["css"]
-            allCSS.append(cssdata)
-            # Create Extended Partition List
-            if cssdata["clause"] and cssdata["clause"] != None:
-                cssParitions = cssdata["clause"].split(":")
-                PartitionList.extend(cssParitions)
+        ## Extract Parition from CSS
 
     # Write Results
     write_results(directory, allCSS, "css")
@@ -102,8 +89,7 @@ def SiteDataExport(directory, siteDataFilterContent):
 
     for partition in set(PartitionList):
         partitionFound = ucm_source.get_partition(name=partition)
-        if type(partitionFound) != Fault:
-            allPartitions.append(partitionFound["return"]["routePartition"])
+        
 
     # Write Results
     write_results(directory, allPartitions, "partition")
@@ -112,10 +98,7 @@ def SiteDataExport(directory, siteDataFilterContent):
 
 
 def export_CSS_Partition():
-    """
-    Step 2: use this function to export
-    CSS and its dependent partitions.
-    """
+
     # Read the dataFilter JSON: This JSON is created in step 1
     dataFilterContent = json.load(open(dataFilterFile))
     for siteCode, siteData in dataFilterContent.items():
@@ -154,7 +137,8 @@ def import_CSS_Partition():
             else:
                 if userAccept == "Y":
                     try:
-                        updateConfigs(configDirectory, ucm_destination,)
+                        pass
+                        #updateConfigs(configDirectory, ucm_destination)
                     except Exception as importExe:
                         logPrint(f"Error Occured while Importing: {importExe}")
                         traceback.print_exc()
