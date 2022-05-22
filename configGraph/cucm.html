@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+
+   <script type="text/javascript" src="lib/bindings/utils.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+
+    
+    <center>
+      <h1>Cisco Unified Communication Manager- AXL Dependency Graph</h1>
+    </center>
+
+    <!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+    <style type="text/css">
+
+         #mynetwork {
+             width: 100%;
+             height: 720px;
+             background-color: #ffffff;
+             border: 1px solid lightgray;
+             position: relative;
+             float: left;
+         }
+
+         
+         #loadingBar {
+             position:absolute;
+             top:0px;
+             left:0px;
+             width: 100%;
+             height: 720px;
+             background-color:rgba(200,200,200,0.8);
+             -webkit-transition: all 0.5s ease;
+             -moz-transition: all 0.5s ease;
+             -ms-transition: all 0.5s ease;
+             -o-transition: all 0.5s ease;
+             transition: all 0.5s ease;
+             opacity:1;
+         }
+
+         #bar {
+             position:absolute;
+             top:0px;
+             left:0px;
+             width:20px;
+             height:20px;
+             margin:auto auto auto auto;
+             border-radius:11px;
+             border:2px solid rgba(30,30,30,0.05);
+             background: rgb(0, 173, 246); /* Old browsers */
+             box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+         }
+
+         #border {
+             position:absolute;
+             top:10px;
+             left:10px;
+             width:500px;
+             height:23px;
+             margin:auto auto auto auto;
+             box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+             border-radius:10px;
+         }
+
+         #text {
+             position:absolute;
+             top:8px;
+             left:530px;
+             width:30px;
+             height:50px;
+             margin:auto auto auto auto;
+             font-size:22px;
+             color: #000000;
+         }
+
+         div.outerBorder {
+             position:relative;
+             top:400px;
+             width:600px;
+             height:44px;
+             margin:auto auto auto auto;
+             border:8px solid rgba(0,0,0,0.1);
+             background: rgb(252,252,252); /* Old browsers */
+             background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+             background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+             background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+             background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+             background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+             border-radius:72px;
+             box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+         }
+         
+
+         
+
+         
+    </style>
+  </head>
+
+  <body>
+    <div class="card" style="width: 100%">
+      
+      <div class="card-header">
+        <div class="row no-gutters">
+          <div class="col-10 pb-2">
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              onchange="selectNode(value);"
+              searchable="Search here"
+              name="nodeName"
+            >
+              <option selected>Select a CUCM entity to highlight</option>
+              
+              <option value="Cisco Unified Communications Manager">Cisco Unified Communications Manager</option>
+              
+              <option value="Server">Server</option>
+              
+              <option value="Location Bandwidth Manager Group">Location Bandwidth Manager Group</option>
+              
+              <option value="Cisco Unified Communications Manager Group">Cisco Unified Communications Manager Group</option>
+              
+              <option value="Phone Ntp Reference">Phone Ntp Reference</option>
+              
+              <option value="Device Pool">Device Pool</option>
+              
+              <option value="Date Time Group">Date Time Group</option>
+              
+              <option value="Location">Location</option>
+              
+              <option value="Region">Region</option>
+              
+              <option value="Physical Location">Physical Location</option>
+              
+              <option value="Device Mobility Group">Device Mobility Group</option>
+              
+              <option value="Srst">Srst</option>
+              
+              <option value="Geo Location Filter">Geo Location Filter</option>
+              
+              <option value="Calling Search Space">Calling Search Space</option>
+              
+              <option value="Aar Group">Aar Group</option>
+              
+              <option value="Route Group">Route Group</option>
+              
+              <option value="Media Resource Group List">Media Resource Group List</option>
+              
+              <option value="Intercompany Media Services Enrolled Group">Intercompany Media Services Enrolled Group</option>
+              
+              <option value="Enterprise Parameters">Enterprise Parameters</option>
+              
+              <option value="Mlpp Domain">Mlpp Domain</option>
+              
+              <option value="Geo Location Configuration">Geo Location Configuration</option>
+              
+              <option value="Feature Control Policy">Feature Control Policy</option>
+              
+              <option value="Audio Codec Preference List">Audio Codec Preference List</option>
+              
+              <option value="Service Parameters">Service Parameters</option>
+              
+              <option value="Security Profile">Security Profile</option>
+              
+              <option value="Presence Group">Presence Group</option>
+              
+              <option value="Ldap System">Ldap System</option>
+              
+              <option value="Ldap Directory">Ldap Directory</option>
+              
+              <option value="Ldap Custom Filter">Ldap Custom Filter</option>
+              
+              <option value="Ldap Authentication">Ldap Authentication</option>
+              
+              <option value="Resource Priority Namespace Network Domain">Resource Priority Namespace Network Domain</option>
+              
+              <option value="Resource Priority Namespace List">Resource Priority Namespace List</option>
+              
+              <option value="Cuma Server Security Profile">Cuma Server Security Profile</option>
+              
+              <option value="Enterprise Phone Configuration">Enterprise Phone Configuration</option>
+              
+              <option value="Certificates">Certificates</option>
+              
+              <option value="Ldap Search">Ldap Search</option>
+              
+              <option value="Uc Services">Uc Services</option>
+              
+              <option value="Application Dial Rules">Application Dial Rules</option>
+              
+              <option value="Partition">Partition</option>
+              
+              <option value="Time Schedule">Time Schedule</option>
+              
+              <option value="Route Filter">Route Filter</option>
+              
+              <option value="Time Period">Time Period</option>
+              
+              <option value="Translation Pattern">Translation Pattern</option>
+              
+              <option value="Forced Authorization Codes">Forced Authorization Codes</option>
+              
+              <option value="Directory Lookup Dial Rules">Directory Lookup Dial Rules</option>
+              
+              <option value="Client Matter Codes">Client Matter Codes</option>
+              
+              <option value="Call Park">Call Park</option>
+              
+              <option value="Call Pickup Group">Call Pickup Group</option>
+              
+              <option value="Directory Number">Directory Number</option>
+              
+              <option value="Voicemail Profile">Voicemail Profile</option>
+              
+              <option value="Meet-Me Number / Pattern">Meet-Me Number / Pattern</option>
+              
+              <option value="Directed Call Park">Directed Call Park</option>
+              
+              <option value="Sip Dial Rules">Sip Dial Rules</option>
+              
+              <option value="Line Group">Line Group</option>
+              
+              <option value="Gateway">Gateway</option>
+              
+              <option value="Device Profile">Device Profile</option>
+              
+              <option value="Cti Route Point">Cti Route Point</option>
+              
+              <option value="Phone">Phone</option>
+              
+              <option value="Remote Destination Profile">Remote Destination Profile</option>
+              
+              <option value="Trunk">Trunk</option>
+              
+              <option value="Hunt List">Hunt List</option>
+              
+              <option value="Route List">Route List</option>
+              
+              <option value="Hunt Pilot">Hunt Pilot</option>
+              
+              <option value="Intercom Route Partition">Intercom Route Partition</option>
+              
+              <option value="Intercom Css">Intercom Css</option>
+              
+              <option value="Access List">Access List</option>
+              
+              <option value="End User">End User</option>
+              
+              <option value="Route Pattern">Route Pattern</option>
+              
+              <option value="Gateways">Gateways</option>
+              
+              <option value="Called Party Transformation Pattern">Called Party Transformation Pattern</option>
+              
+              <option value="Sip Route Pattern">Sip Route Pattern</option>
+              
+              <option value="Intercom Directory Number (Unassigned)">Intercom Directory Number (Unassigned)</option>
+              
+              <option value="Intercom Translation Pattern">Intercom Translation Pattern</option>
+              
+              <option value="Calling Party Transformation Pattern">Calling Party Transformation Pattern</option>
+              
+              <option value="Location Partition Policy Configuration">Location Partition Policy Configuration</option>
+              
+              <option value="Requesting Services">Requesting Services</option>
+              
+              <option value="Ccd Partition">Ccd Partition</option>
+              
+              <option value="Hosted Dn Group">Hosted Dn Group</option>
+              
+              <option value="Block Learned Pattern">Block Learned Pattern</option>
+              
+              <option value="Hosted Dn Patterns">Hosted Dn Patterns</option>
+              
+              <option value="Advertising Services">Advertising Services</option>
+              
+              <option value="External Call Control Profile">External Call Control Profile</option>
+              
+              <option value="Transformation Profile">Transformation Profile</option>
+              
+              <option value="Ccd Feature Configuration">Ccd Feature Configuration</option>
+              
+              <option value="Mobility Profile">Mobility Profile</option>
+              
+              <option value="Enterprise Feature Access Configuration">Enterprise Feature Access Configuration</option>
+              
+              <option value="Handoff Configuration">Handoff Configuration</option>
+              
+              <option value="Local Route Group">Local Route Group</option>
+              
+              <option value="Conference Now">Conference Now</option>
+              
+              <option value="Annunciator">Annunciator</option>
+              
+              <option value="Conference Bridge">Conference Bridge</option>
+              
+              <option value="Common Device Configuration">Common Device Configuration</option>
+              
+              <option value="Media Resource Group">Media Resource Group</option>
+              
+              <option value="Music On Hold">Music On Hold</option>
+              
+              <option value="Media Termination Point">Media Termination Point</option>
+              
+              <option value="Ivr">Ivr</option>
+              
+              <option value="Transcoder">Transcoder</option>
+              
+              <option value="Music On Hold Server">Music On Hold Server</option>
+              
+              <option value="Mobile Voice Access">Mobile Voice Access</option>
+              
+              <option value="Voh Server">Voh Server</option>
+              
+              <option value="Sip Realm">Sip Realm</option>
+              
+              <option value="Application User">Application User</option>
+              
+              <option value="Access Control Group">Access Control Group</option>
+              
+              <option value="Role">Role</option>
+              
+              <option value="Application User Capf Profile">Application User Capf Profile</option>
+              
+              <option value="Credential Policy">Credential Policy</option>
+              
+              <option value="Cedential Policy Default">Cedential Policy Default</option>
+              
+              <option value="End User Capf Profile">End User Capf Profile</option>
+              
+              <option value="Service Profile">Service Profile</option>
+              
+              <option value="User Profile">User Profile</option>
+              
+              <option value="Self Provioning">Self Provioning</option>
+              
+              <option value="Feature Group Template">Feature Group Template</option>
+              
+              <option value="Universal Device Template">Universal Device Template</option>
+              
+              <option value="Softkey Template">Softkey Template</option>
+              
+              <option value="Gatekeeper">Gatekeeper</option>
+              
+              <option value="Sip Profile">Sip Profile</option>
+              
+              <option value="Phone Services">Phone Services</option>
+              
+              <option value="Phone Button Template">Phone Button Template</option>
+              
+              <option value="Common Phone Profile">Common Phone Profile</option>
+              
+              <option value="Recording Profile">Recording Profile</option>
+              
+              <option value="Wi-Fi Hotspot Profile">Wi-Fi Hotspot Profile</option>
+              
+              <option value="Universal Line Template">Universal Line Template</option>
+              
+              <option value="Sip Normalization Script">Sip Normalization Script</option>
+              
+              <option value="Intercompany Media Services E.164 Transformation">Intercompany Media Services E.164 Transformation</option>
+              
+              <option value="Sdp Transparency Profile">Sdp Transparency Profile</option>
+              
+              <option value="Cisco Communications Manager Group">Cisco Communications Manager Group</option>
+              
+              <option value="Device Defaults">Device Defaults</option>
+              
+              <option value="Remote Destination">Remote Destination</option>
+              
+              <option value="Default Device Profile">Default Device Profile</option>
+              
+              <option value="Wireless Lan Profile Group">Wireless Lan Profile Group</option>
+              
+              <option value="Wireless Lan Profile">Wireless Lan Profile</option>
+              
+              <option value="Network Access Profile">Network Access Profile</option>
+              
+              <option value="Wi-Fi Hostpot Profile">Wi-Fi Hostpot Profile</option>
+              
+              <option value="Expressway-C">Expressway-C</option>
+              
+              <option value="Message Waiting Indicator">Message Waiting Indicator</option>
+              
+              <option value="Voice Mail Pilot">Voice Mail Pilot</option>
+              
+              <option value="Voicemail Pilot">Voicemail Pilot</option>
+              
+              <option value="Voice Mail Port">Voice Mail Port</option>
+              
+              <option value="Saf Forwarder">Saf Forwarder</option>
+              
+              <option value="Saf Security Profile">Saf Security Profile</option>
+              
+              <option value="Emcc Remote Cluster">Emcc Remote Cluster</option>
+              
+              <option value="Emcc Intercluster Service Profile">Emcc Intercluster Service Profile</option>
+              
+              <option value="Intercompany Media Engine Server Connection">Intercompany Media Engine Server Connection</option>
+              
+              <option value="Intercompany Media Service">Intercompany Media Service</option>
+              
+              <option value="Intercompany Media Service Trust Group">Intercompany Media Service Trust Group</option>
+              
+              <option value="Intercompany Media Services Trust Element">Intercompany Media Services Trust Element</option>
+              
+              <option value="Intercompany Media Services Enrolled Pattern">Intercompany Media Services Enrolled Pattern</option>
+              
+              <option value="Intercompany Media Services Firewall">Intercompany Media Services Firewall</option>
+              
+              <option value="Intercompany Media Services Exclusion Number">Intercompany Media Services Exclusion Number</option>
+              
+              <option value="Fallback Profile">Fallback Profile</option>
+              
+              <option value="Intercompany Media Services Exclusion Group">Intercompany Media Services Exclusion Group</option>
+              
+              <option value="Intercompany Media Services Learned Route">Intercompany Media Services Learned Route</option>
+              
+              <option value="Vpn Profile">Vpn Profile</option>
+              
+              <option value="Vpn Gateway">Vpn Gateway</option>
+              
+              <option value="Vpn Group">Vpn Group</option>
+              
+              <option value="Emcc Feature Configuration">Emcc Feature Configuration</option>
+              
+              <option value="Intercompany Media Services Feature Configuration">Intercompany Media Services Feature Configuration</option>
+              
+              <option value="Fallback Feature Configuration">Fallback Feature Configuration</option>
+              
+              <option value="Vpn Feature Configuration">Vpn Feature Configuration</option>
+              
+              <option value="Called Party Tracing">Called Party Tracing</option>
+              
+              <option value="Directory Number Alias Lookup And Sync">Directory Number Alias Lookup And Sync</option>
+              
+              <option value="Call Control Agent Profile">Call Control Agent Profile</option>
+              
+              <option value="Infrastructure Device">Infrastructure Device</option>
+               
+            </select>
+          </div>
+          <div class="col-2 pb-2">
+            <button type="button" class="btn btn-secondary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+          <div>
+        </div>
+      </div>
+      
+      <div id="mynetwork" class="card-body"></div>
+    </div>
+     
+    <div id="loadingBar">
+      <div class="outerBorder">
+        <div id="text">0%</div>
+        <div id="border">
+          <div id="bar"></div>
+        </div>
+      </div>
+    </div>
+
+ 
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var allNodes;
+    var nodeColors;
+    var originalNodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "Cisco Unified Communications Manager", "label": "Cisco Unified Communications Manager", "shape": "dot", "title": "Cisco Unified Communications Manager, Depends upon:\nServer\n\tLocation Bandwidth Manager Group", "value": 2}, {"id": "Server", "label": "Server", "shape": "dot", "title": "Server, Depends upon:\n", "value": 0}, {"id": "Location Bandwidth Manager Group", "label": "Location Bandwidth Manager Group", "shape": "dot", "title": "Location Bandwidth Manager Group, Depends upon:\nServer", "value": 1}, {"id": "Cisco Unified Communications Manager Group", "label": "Cisco Unified Communications Manager Group", "shape": "dot", "title": "Cisco Unified Communications Manager Group, Depends upon:\nPhone Ntp Reference", "value": 1}, {"id": "Phone Ntp Reference", "label": "Phone Ntp Reference", "shape": "dot", "title": "Phone Ntp Reference, Depends upon:\n", "value": 0}, {"id": "Device Pool", "label": "Device Pool", "shape": "dot", "title": "Device Pool, Depends upon:\nCisco Unified Communications Manager Group\n\tDate Time Group\n\tLocation\n\tRegion\n\tPhysical Location\n\tDevice Mobility Group\n\tSrst\n\tGeo Location Filter\n\tCalling Search Space\n\tAar Group\n\tRoute Group\n\tMedia Resource Group List\n\tIntercompany Media Services Enrolled Group", "value": 13}, {"id": "Date Time Group", "label": "Date Time Group", "shape": "dot", "title": "Date Time Group, Depends upon:\nNone", "value": 1}, {"id": "Location", "label": "Location", "shape": "dot", "title": "Location, Depends upon:\n", "value": 0}, {"id": "Region", "label": "Region", "shape": "dot", "title": "Region, Depends upon:\nAudio Codec Preference List", "value": 1}, {"id": "Physical Location", "label": "Physical Location", "shape": "dot", "title": "Physical Location, Depends upon:\n", "value": 0}, {"id": "Device Mobility Group", "label": "Device Mobility Group", "shape": "dot", "title": "Device Mobility Group, Depends upon:\n", "value": 0}, {"id": "Srst", "label": "Srst", "shape": "dot", "title": "Srst, Depends upon:\n", "value": 0}, {"id": "Geo Location Filter", "label": "Geo Location Filter", "shape": "dot", "title": "Geo Location Filter, Depends upon:\n", "value": 0}, {"id": "Calling Search Space", "label": "Calling Search Space", "shape": "dot", "title": "Calling Search Space, Depends upon:\nPartition", "value": 1}, {"id": "Aar Group", "label": "Aar Group", "shape": "dot", "title": "Aar Group, Depends upon:\n", "value": 0}, {"id": "Route Group", "label": "Route Group", "shape": "dot", "title": "Route Group, Depends upon:\nTrunk\n\tGateway", "value": 2}, {"id": "Media Resource Group List", "label": "Media Resource Group List", "shape": "dot", "title": "Media Resource Group List, Depends upon:\nMedia Resource Group", "value": 1}, {"id": "Intercompany Media Services Enrolled Group", "label": "Intercompany Media Services Enrolled Group", "shape": "dot", "title": "Intercompany Media Services Enrolled Group, Depends upon:\nFallback Profile", "value": 1}, {"id": "Enterprise Parameters", "label": "Enterprise Parameters", "shape": "dot", "title": "Enterprise Parameters, Depends upon:\nMlpp Domain\n\tGeo Location Configuration\n\tFeature Control Policy", "value": 3}, {"id": "Mlpp Domain", "label": "Mlpp Domain", "shape": "dot", "title": "Mlpp Domain, Depends upon:\n", "value": 0}, {"id": "Geo Location Configuration", "label": "Geo Location Configuration", "shape": "dot", "title": "Geo Location Configuration, Depends upon:\n", "value": 0}, {"id": "Feature Control Policy", "label": "Feature Control Policy", "shape": "dot", "title": "Feature Control Policy, Depends upon:\n", "value": 0}, {"id": "Audio Codec Preference List", "label": "Audio Codec Preference List", "shape": "dot", "title": "Audio Codec Preference List, Depends upon:\n", "value": 0}, {"id": "Service Parameters", "label": "Service Parameters", "shape": "dot", "title": "Service Parameters, Depends upon:\nServer", "value": 1}, {"id": "Security Profile", "label": "Security Profile", "shape": "dot", "title": "Security Profile, Depends upon:\n", "value": 0}, {"id": "Presence Group", "label": "Presence Group", "shape": "dot", "title": "Presence Group, Depends upon:\n", "value": 0}, {"id": "Ldap System", "label": "Ldap System", "shape": "dot", "title": "Ldap System, Depends upon:\n", "value": 0}, {"id": "Ldap Directory", "label": "Ldap Directory", "shape": "dot", "title": "Ldap Directory, Depends upon:\nLdap System\n\tLdap Custom Filter", "value": 2}, {"id": "Ldap Custom Filter", "label": "Ldap Custom Filter", "shape": "dot", "title": "Ldap Custom Filter, Depends upon:\n", "value": 0}, {"id": "Ldap Authentication", "label": "Ldap Authentication", "shape": "dot", "title": "Ldap Authentication, Depends upon:\n", "value": 0}, {"id": "Resource Priority Namespace Network Domain", "label": "Resource Priority Namespace Network Domain", "shape": "dot", "title": "Resource Priority Namespace Network Domain, Depends upon:\n", "value": 0}, {"id": "Resource Priority Namespace List", "label": "Resource Priority Namespace List", "shape": "dot", "title": "Resource Priority Namespace List, Depends upon:\nResource Priority Namespace Network Domain", "value": 1}, {"id": "Cuma Server Security Profile", "label": "Cuma Server Security Profile", "shape": "dot", "title": "Cuma Server Security Profile, Depends upon:\n", "value": 0}, {"id": "Enterprise Phone Configuration", "label": "Enterprise Phone Configuration", "shape": "dot", "title": "Enterprise Phone Configuration, Depends upon:\n", "value": 0}, {"id": "Certificates", "label": "Certificates", "shape": "dot", "title": "Certificates, Depends upon:\n", "value": 0}, {"id": "Ldap Search", "label": "Ldap Search", "shape": "dot", "title": "Ldap Search, Depends upon:\nLdap Custom Filter\n\tUc Services", "value": 2}, {"id": "Uc Services", "label": "Uc Services", "shape": "dot", "title": "Uc Services, Depends upon:\n", "value": 0}, {"id": "Application Dial Rules", "label": "Application Dial Rules", "shape": "dot", "title": "Application Dial Rules, Depends upon:\n", "value": 0}, {"id": "Partition", "label": "Partition", "shape": "dot", "title": "Partition, Depends upon:\nTime Schedule", "value": 1}, {"id": "Time Schedule", "label": "Time Schedule", "shape": "dot", "title": "Time Schedule, Depends upon:\nTime Period", "value": 1}, {"id": "Route Filter", "label": "Route Filter", "shape": "dot", "title": "Route Filter, Depends upon:\n", "value": 0}, {"id": "Time Period", "label": "Time Period", "shape": "dot", "title": "Time Period, Depends upon:\n", "value": 0}, {"id": "Translation Pattern", "label": "Translation Pattern", "shape": "dot", "title": "Translation Pattern, Depends upon:\nPartition\n\tCalling Search Space\n\tRoute Filter\n\tResource Priority Namespace Network Domain", "value": 4}, {"id": "Forced Authorization Codes", "label": "Forced Authorization Codes", "shape": "dot", "title": "Forced Authorization Codes, Depends upon:\n", "value": 0}, {"id": "Directory Lookup Dial Rules", "label": "Directory Lookup Dial Rules", "shape": "dot", "title": "Directory Lookup Dial Rules, Depends upon:\n", "value": 0}, {"id": "Client Matter Codes", "label": "Client Matter Codes", "shape": "dot", "title": "Client Matter Codes, Depends upon:\n", "value": 0}, {"id": "Call Park", "label": "Call Park", "shape": "dot", "title": "Call Park, Depends upon:\nPartition", "value": 1}, {"id": "Call Pickup Group", "label": "Call Pickup Group", "shape": "dot", "title": "Call Pickup Group, Depends upon:\nPartition", "value": 1}, {"id": "Directory Number", "label": "Directory Number", "shape": "dot", "title": "Directory Number, Depends upon:\nPresence Group\n\tCalling Search Space\n\tPartition\n\tAar Group\n\tCall Pickup Group\n\tVoicemail Profile", "value": 6}, {"id": "Voicemail Profile", "label": "Voicemail Profile", "shape": "dot", "title": "Voicemail Profile, Depends upon:\nVoicemail Pilot", "value": 1}, {"id": "Meet-Me Number / Pattern", "label": "Meet-Me Number / Pattern", "shape": "dot", "title": "Meet-Me Number / Pattern, Depends upon:\nPartition", "value": 1}, {"id": "Directed Call Park", "label": "Directed Call Park", "shape": "dot", "title": "Directed Call Park, Depends upon:\nPartition\n\tCalling Search Space", "value": 2}, {"id": "Sip Dial Rules", "label": "Sip Dial Rules", "shape": "dot", "title": "Sip Dial Rules, Depends upon:\n", "value": 0}, {"id": "Line Group", "label": "Line Group", "shape": "dot", "title": "Line Group, Depends upon:\nPartition\n\tDirectory Number\n\tGateway\n\tDevice Profile\n\tCti Route Point\n\tPhone\n\tRemote Destination Profile\n\tVoicemail Profile", "value": 8}, {"id": "Gateway", "label": "Gateway", "shape": "dot", "title": "Gateway, Depends upon:\nCisco Communications Manager Group\n\tDevice Pool\n\tLocation\n\tPresence Group\n\tMlpp Domain\n\tGeo Location Filter\n\tCalling Search Space\n\tPartition\n\tAar Group\n\tCall Pickup Group\n\tMedia Resource Group List\n\tEnd User\n\tPhone Button Template\n\tCommon Phone Profile\n\tCommon Device Configuration\n\tRecording Profile\n\tVoicemail Profile\n\tIntercompany Media Services E.164 Transformation", "value": 18}, {"id": "Device Profile", "label": "Device Profile", "shape": "dot", "title": "Device Profile, Depends upon:\nPresence Group\n\tMlpp Domain\n\tCalling Search Space\n\tPartition\n\tCall Pickup Group\n\tIntercom Route Partition\n\tIntercom Css\n\tMedia Resource Group List\n\tEnd User\n\tSoftkey Template\n\tPhone Button Template\n\tFeature Control Policy", "value": 12}, {"id": "Cti Route Point", "label": "Cti Route Point", "shape": "dot", "title": "Cti Route Point, Depends upon:\nDevice Pool\n\tLocation\n\tPresence Group\n\tCalling Search Space\n\tPartition\n\tAar Group\n\tMedia Resource Group List\n\tVoicemail Profile", "value": 8}, {"id": "Phone", "label": "Phone", "shape": "dot", "title": "Phone, Depends upon:\nDevice Pool\n\tLocation\n\tPresence Group\n\tMlpp Domain\n\tCalling Search Space\n\tPartition\n\tTime Period\n\tTime Schedule\n\tAar Group\n\tCall Pickup Group\n\tSip Dial Rules\n\tIntercom Route Partition\n\tIntercom Css\n\tAccess List\n\tMobility Profile\n\tMedia Resource Group List\n\tEnd User\n\tSoftkey Template\n\tGatekeeper\n\tSip Profile\n\tPhone Services\n\tPhone Button Template\n\tCommon Phone Profile\n\tDevice Profile\n\tCommon Device Configuration\n\tRecording Profile\n\tFeature Control Policy\n\tVoicemail Profile", "value": 28}, {"id": "Remote Destination Profile", "label": "Remote Destination Profile", "shape": "dot", "title": "Remote Destination Profile, Depends upon:\nDevice Pool\n\tPresence Group\n\tCalling Search Space\n\tPartition\n\tAar Group\n\tCall Pickup Group\n\tEnd User\n\tRemote Destination\n\tVoicemail Profile", "value": 9}, {"id": "Trunk", "label": "Trunk", "shape": "dot", "title": "Trunk, Depends upon:\nDevice Pool\n\tLocation\n\tSecurity Profile\n\tPresence Group\n\tMlpp Domain\n\tGeo Location Filter\n\tCalling Search Space\n\tAar Group\n\tMedia Resource Group List\n\tGatekeeper\n\tSip Profile\n\tCommon Device Configuration\n\tSip Normalization Script\n\tIntercompany Media Services E.164 Transformation", "value": 14}, {"id": "Hunt List", "label": "Hunt List", "shape": "dot", "title": "Hunt List, Depends upon:\nLine Group\n\tCisco Unified Communications Manager Group", "value": 2}, {"id": "Route List", "label": "Route List", "shape": "dot", "title": "Route List, Depends upon:\nRoute Group\n\tCisco Unified Communications Manager Group", "value": 2}, {"id": "Hunt Pilot", "label": "Hunt Pilot", "shape": "dot", "title": "Hunt Pilot, Depends upon:\nCalling Search Space\n\tPartition\n\tRoute Filter\n\tAar Group\n\tCall Pickup Group\n\tHunt List", "value": 6}, {"id": "Intercom Route Partition", "label": "Intercom Route Partition", "shape": "dot", "title": "Intercom Route Partition, Depends upon:\nTime Schedule", "value": 1}, {"id": "Intercom Css", "label": "Intercom Css", "shape": "dot", "title": "Intercom Css, Depends upon:\nIntercom Route Partition", "value": 1}, {"id": "Access List", "label": "Access List", "shape": "dot", "title": "Access List, Depends upon:\nEnd User\n\tDirectory Number", "value": 2}, {"id": "End User", "label": "End User", "shape": "dot", "title": "End User, Depends upon:\nPresence Group\n\tCalling Search Space\n\tAccess Control Group\n\tRole\n\tCredential Policy\n\tEnd User Capf Profile\n\tUc Services\n\tService Profile\n\tUser Profile\n\tPhone", "value": 10}, {"id": "Route Pattern", "label": "Route Pattern", "shape": "dot", "title": "Route Pattern, Depends upon:\nResource Priority Namespace Network Domain\n\tPartition\n\tRoute Filter\n\tRoute List\n\tTrunk\n\tGateways", "value": 6}, {"id": "Gateways", "label": "Gateways", "shape": "dot", "title": "Gateways, Depends upon:\nNone", "value": 1}, {"id": "Called Party Transformation Pattern", "label": "Called Party Transformation Pattern", "shape": "dot", "title": "Called Party Transformation Pattern, Depends upon:\nPartition\n\tRoute Filter", "value": 2}, {"id": "Sip Route Pattern", "label": "Sip Route Pattern", "shape": "dot", "title": "Sip Route Pattern, Depends upon:\nPartition\n\tRoute Group\n\tRoute List\n\tTrunk", "value": 4}, {"id": "Intercom Directory Number (Unassigned)", "label": "Intercom Directory Number (Unassigned)", "shape": "dot", "title": "Intercom Directory Number (Unassigned), Depends upon:\nPresence Group\n\tIntercom Route Partition\n\tIntercom Css\n\tPhone\n\tDevice Profile", "value": 5}, {"id": "Intercom Translation Pattern", "label": "Intercom Translation Pattern", "shape": "dot", "title": "Intercom Translation Pattern, Depends upon:\nIntercom Route Partition\n\tIntercom Css\n\tRoute Filter", "value": 3}, {"id": "Calling Party Transformation Pattern", "label": "Calling Party Transformation Pattern", "shape": "dot", "title": "Calling Party Transformation Pattern, Depends upon:\nPartition\n\tRoute Filter", "value": 2}, {"id": "Location Partition Policy Configuration", "label": "Location Partition Policy Configuration", "shape": "dot", "title": "Location Partition Policy Configuration, Depends upon:\n", "value": 0}, {"id": "Requesting Services", "label": "Requesting Services", "shape": "dot", "title": "Requesting Services, Depends upon:\nCcd Partition\n\tTrunk", "value": 2}, {"id": "Ccd Partition", "label": "Ccd Partition", "shape": "dot", "title": "Ccd Partition, Depends upon:\n", "value": 0}, {"id": "Hosted Dn Group", "label": "Hosted Dn Group", "shape": "dot", "title": "Hosted Dn Group, Depends upon:\n", "value": 0}, {"id": "Block Learned Pattern", "label": "Block Learned Pattern", "shape": "dot", "title": "Block Learned Pattern, Depends upon:\n", "value": 0}, {"id": "Hosted Dn Patterns", "label": "Hosted Dn Patterns", "shape": "dot", "title": "Hosted Dn Patterns, Depends upon:\nHosted Dn Group", "value": 1}, {"id": "Advertising Services", "label": "Advertising Services", "shape": "dot", "title": "Advertising Services, Depends upon:\nHosted Dn Group\n\tHosted Dn Patterns\n\tTrunk", "value": 3}, {"id": "External Call Control Profile", "label": "External Call Control Profile", "shape": "dot", "title": "External Call Control Profile, Depends upon:\nCalling Search Space\n\tIntercom Css", "value": 2}, {"id": "Transformation Profile", "label": "Transformation Profile", "shape": "dot", "title": "Transformation Profile, Depends upon:\n", "value": 0}, {"id": "Ccd Feature Configuration", "label": "Ccd Feature Configuration", "shape": "dot", "title": "Ccd Feature Configuration, Depends upon:\n", "value": 0}, {"id": "Mobility Profile", "label": "Mobility Profile", "shape": "dot", "title": "Mobility Profile, Depends upon:\nPartition\n\tEnterprise Feature Access Configuration", "value": 2}, {"id": "Enterprise Feature Access Configuration", "label": "Enterprise Feature Access Configuration", "shape": "dot", "title": "Enterprise Feature Access Configuration, Depends upon:\nPartition", "value": 1}, {"id": "Handoff Configuration", "label": "Handoff Configuration", "shape": "dot", "title": "Handoff Configuration, Depends upon:\nPartition", "value": 1}, {"id": "Local Route Group", "label": "Local Route Group", "shape": "dot", "title": "Local Route Group, Depends upon:\n", "value": 0}, {"id": "Conference Now", "label": "Conference Now", "shape": "dot", "title": "Conference Now, Depends upon:\nPartition", "value": 1}, {"id": "Annunciator", "label": "Annunciator", "shape": "dot", "title": "Annunciator, Depends upon:\nLocation\n\tDevice Pool", "value": 2}, {"id": "Conference Bridge", "label": "Conference Bridge", "shape": "dot", "title": "Conference Bridge, Depends upon:\nLocation\n\tDevice Pool\n\tTrunk\n\tCommon Device Configuration", "value": 4}, {"id": "Common Device Configuration", "label": "Common Device Configuration", "shape": "dot", "title": "Common Device Configuration, Depends upon:\nMlpp Domain\n\tSoftkey Template", "value": 2}, {"id": "Media Resource Group", "label": "Media Resource Group", "shape": "dot", "title": "Media Resource Group, Depends upon:\nAnnunciator\n\tConference Bridge\n\tMusic On Hold\n\tMedia Termination Point\n\tIvr", "value": 5}, {"id": "Music On Hold", "label": "Music On Hold", "shape": "dot", "title": "Music On Hold, Depends upon:\nNone", "value": 1}, {"id": "Media Termination Point", "label": "Media Termination Point", "shape": "dot", "title": "Media Termination Point, Depends upon:\nDevice Pool", "value": 1}, {"id": "Ivr", "label": "Ivr", "shape": "dot", "title": "Ivr, Depends upon:\nDevice Pool\n\tLocation", "value": 2}, {"id": "Transcoder", "label": "Transcoder", "shape": "dot", "title": "Transcoder, Depends upon:\nDevice Pool\n\tCommon Device Configuration", "value": 2}, {"id": "Music On Hold Server", "label": "Music On Hold Server", "shape": "dot", "title": "Music On Hold Server, Depends upon:\nDevice Pool\n\tLocation", "value": 2}, {"id": "Mobile Voice Access", "label": "Mobile Voice Access", "shape": "dot", "title": "Mobile Voice Access, Depends upon:\nPartition", "value": 1}, {"id": "Voh Server", "label": "Voh Server", "shape": "dot", "title": "Voh Server, Depends upon:\nTrunk", "value": 1}, {"id": "Sip Realm", "label": "Sip Realm", "shape": "dot", "title": "Sip Realm, Depends upon:\n", "value": 0}, {"id": "Application User", "label": "Application User", "shape": "dot", "title": "Application User, Depends upon:\nPresence Group\n\tAccess Control Group\n\tRole\n\tApplication User Capf Profile\n\tCredential Policy\n\tCti Route Point\n\tPhone", "value": 7}, {"id": "Access Control Group", "label": "Access Control Group", "shape": "dot", "title": "Access Control Group, Depends upon:\nApplication User\n\tRole\n\tEnd User", "value": 3}, {"id": "Role", "label": "Role", "shape": "dot", "title": "Role, Depends upon:\n", "value": 0}, {"id": "Application User Capf Profile", "label": "Application User Capf Profile", "shape": "dot", "title": "Application User Capf Profile, Depends upon:\nApplication User", "value": 1}, {"id": "Credential Policy", "label": "Credential Policy", "shape": "dot", "title": "Credential Policy, Depends upon:\n", "value": 0}, {"id": "Cedential Policy Default", "label": "Cedential Policy Default", "shape": "dot", "title": "Cedential Policy Default, Depends upon:\nCredential Policy", "value": 1}, {"id": "End User Capf Profile", "label": "End User Capf Profile", "shape": "dot", "title": "End User Capf Profile, Depends upon:\nEnd User", "value": 1}, {"id": "Service Profile", "label": "Service Profile", "shape": "dot", "title": "Service Profile, Depends upon:\nUc Services", "value": 1}, {"id": "User Profile", "label": "User Profile", "shape": "dot", "title": "User Profile, Depends upon:\n", "value": 0}, {"id": "Self Provioning", "label": "Self Provioning", "shape": "dot", "title": "Self Provioning, Depends upon:\nApplication User\n\tCti Route Point", "value": 2}, {"id": "Feature Group Template", "label": "Feature Group Template", "shape": "dot", "title": "Feature Group Template, Depends upon:\nService Profile\n\tUser Profile", "value": 2}, {"id": "Universal Device Template", "label": "Universal Device Template", "shape": "dot", "title": "Universal Device Template, Depends upon:\nDevice Pool\n\tLocation\n\tSecurity Profile\n\tPresence Group\n\tCalling Search Space\n\tPartition\n\tTime Period\n\tTime Schedule\n\tAar Group\n\tCall Pickup Group\n\tSip Dial Rules\n\tIntercom Route Partition\n\tIntercom Css\n\tAccess List\n\tMobility Profile\n\tMedia Resource Group List\n\tEnd User\n\tSoftkey Template\n\tGatekeeper\n\tSip Profile\n\tPhone Services\n\tPhone Button Template\n\tCommon Phone Profile\n\tDevice Profile\n\tCommon Device Configuration\n\tRecording Profile\n\tFeature Control Policy\n\tWi-Fi Hotspot Profile", "value": 28}, {"id": "Softkey Template", "label": "Softkey Template", "shape": "dot", "title": "Softkey Template, Depends upon:\n", "value": 0}, {"id": "Gatekeeper", "label": "Gatekeeper", "shape": "dot", "title": "Gatekeeper, Depends upon:\n", "value": 0}, {"id": "Sip Profile", "label": "Sip Profile", "shape": "dot", "title": "Sip Profile, Depends upon:\nResource Priority Namespace List\n\tSdp Transparency Profile", "value": 2}, {"id": "Phone Services", "label": "Phone Services", "shape": "dot", "title": "Phone Services, Depends upon:\n", "value": 0}, {"id": "Phone Button Template", "label": "Phone Button Template", "shape": "dot", "title": "Phone Button Template, Depends upon:\n", "value": 0}, {"id": "Common Phone Profile", "label": "Common Phone Profile", "shape": "dot", "title": "Common Phone Profile, Depends upon:\nWi-Fi Hotspot Profile\n\tFeature Control Policy", "value": 2}, {"id": "Recording Profile", "label": "Recording Profile", "shape": "dot", "title": "Recording Profile, Depends upon:\nCalling Search Space", "value": 1}, {"id": "Wi-Fi Hotspot Profile", "label": "Wi-Fi Hotspot Profile", "shape": "dot", "title": "Wi-Fi Hotspot Profile, Depends upon:\nNone", "value": 1}, {"id": "Universal Line Template", "label": "Universal Line Template", "shape": "dot", "title": "Universal Line Template, Depends upon:\nPresence Group\n\tCalling Search Space\n\tPartition\n\tAar Group\n\tCall Pickup Group\n\tVoicemail Profile", "value": 6}, {"id": "Sip Normalization Script", "label": "Sip Normalization Script", "shape": "dot", "title": "Sip Normalization Script, Depends upon:\n", "value": 0}, {"id": "Intercompany Media Services E.164 Transformation", "label": "Intercompany Media Services E.164 Transformation", "shape": "dot", "title": "Intercompany Media Services E.164 Transformation, Depends upon:\nCalling Search Space\n\tIntercom Css\n\tTransformation Profile", "value": 3}, {"id": "Sdp Transparency Profile", "label": "Sdp Transparency Profile", "shape": "dot", "title": "Sdp Transparency Profile, Depends upon:\n", "value": 0}, {"id": "Cisco Communications Manager Group", "label": "Cisco Communications Manager Group", "shape": "dot", "title": "Cisco Communications Manager Group, Depends upon:\nNone", "value": 1}, {"id": "Device Defaults", "label": "Device Defaults", "shape": "dot", "title": "Device Defaults, Depends upon:\nDevice Pool", "value": 1}, {"id": "Remote Destination", "label": "Remote Destination", "shape": "dot", "title": "Remote Destination, Depends upon:\nPartition\n\tAccess List\n\tMobility Profile\n\tEnd User\n\tPhone\n\tRemote Destination Profile", "value": 6}, {"id": "Default Device Profile", "label": "Default Device Profile", "shape": "dot", "title": "Default Device Profile, Depends upon:\nMlpp Domain\n\tCalling Search Space\n\tSoftkey Template\n\tPhone Button Template\n\tFeature Control Policy", "value": 5}, {"id": "Wireless Lan Profile Group", "label": "Wireless Lan Profile Group", "shape": "dot", "title": "Wireless Lan Profile Group, Depends upon:\nWireless Lan Profile", "value": 1}, {"id": "Wireless Lan Profile", "label": "Wireless Lan Profile", "shape": "dot", "title": "Wireless Lan Profile, Depends upon:\nNetwork Access Profile", "value": 1}, {"id": "Network Access Profile", "label": "Network Access Profile", "shape": "dot", "title": "Network Access Profile, Depends upon:\n", "value": 0}, {"id": "Wi-Fi Hostpot Profile", "label": "Wi-Fi Hostpot Profile", "shape": "dot", "title": "Wi-Fi Hostpot Profile, Depends upon:\n", "value": 0}, {"id": "Expressway-C", "label": "Expressway-C", "shape": "dot", "title": "Expressway-C, Depends upon:\n", "value": 0}, {"id": "Message Waiting Indicator", "label": "Message Waiting Indicator", "shape": "dot", "title": "Message Waiting Indicator, Depends upon:\nPartition\n\tCalling Search Space", "value": 2}, {"id": "Voice Mail Pilot", "label": "Voice Mail Pilot", "shape": "dot", "title": "Voice Mail Pilot, Depends upon:\nCalling Search Space", "value": 1}, {"id": "Voicemail Pilot", "label": "Voicemail Pilot", "shape": "dot", "title": "Voicemail Pilot, Depends upon:\nNone", "value": 1}, {"id": "Voice Mail Port", "label": "Voice Mail Port", "shape": "dot", "title": "Voice Mail Port, Depends upon:\nDevice Pool\n\tLocation\n\tCalling Search Space\n\tAar Group\n\tCommon Device Configuration", "value": 5}, {"id": "Saf Forwarder", "label": "Saf Forwarder", "shape": "dot", "title": "Saf Forwarder, Depends upon:\nCisco Unified Communications Manager\n\tSaf Security Profile", "value": 2}, {"id": "Saf Security Profile", "label": "Saf Security Profile", "shape": "dot", "title": "Saf Security Profile, Depends upon:\n", "value": 0}, {"id": "Emcc Remote Cluster", "label": "Emcc Remote Cluster", "shape": "dot", "title": "Emcc Remote Cluster, Depends upon:\n", "value": 0}, {"id": "Emcc Intercluster Service Profile", "label": "Emcc Intercluster Service Profile", "shape": "dot", "title": "Emcc Intercluster Service Profile, Depends upon:\nTrunk", "value": 1}, {"id": "Intercompany Media Engine Server Connection", "label": "Intercompany Media Engine Server Connection", "shape": "dot", "title": "Intercompany Media Engine Server Connection, Depends upon:\nApplication User", "value": 1}, {"id": "Intercompany Media Service", "label": "Intercompany Media Service", "shape": "dot", "title": "Intercompany Media Service, Depends upon:\nTrunk\n\tIntercompany Media Engine Server Connection\n\tIntercompany Media Service Trust Group\n\tIntercompany Media Services Trust Element\n\tIntercompany Media Services Enrolled Pattern\n\tIntercompany Media Services Enrolled Group\n\tIntercompany Media Services Firewall\n\tIntercompany Media Services Exclusion Number", "value": 8}, {"id": "Intercompany Media Service Trust Group", "label": "Intercompany Media Service Trust Group", "shape": "dot", "title": "Intercompany Media Service Trust Group, Depends upon:\n", "value": 0}, {"id": "Intercompany Media Services Trust Element", "label": "Intercompany Media Services Trust Element", "shape": "dot", "title": "Intercompany Media Services Trust Element, Depends upon:\nIntercompany Media Service Trust Group", "value": 1}, {"id": "Intercompany Media Services Enrolled Pattern", "label": "Intercompany Media Services Enrolled Pattern", "shape": "dot", "title": "Intercompany Media Services Enrolled Pattern, Depends upon:\nIntercompany Media Services Enrolled Group", "value": 1}, {"id": "Intercompany Media Services Firewall", "label": "Intercompany Media Services Firewall", "shape": "dot", "title": "Intercompany Media Services Firewall, Depends upon:\n", "value": 0}, {"id": "Intercompany Media Services Exclusion Number", "label": "Intercompany Media Services Exclusion Number", "shape": "dot", "title": "Intercompany Media Services Exclusion Number, Depends upon:\nIntercompany Media Services Exclusion Group", "value": 1}, {"id": "Fallback Profile", "label": "Fallback Profile", "shape": "dot", "title": "Fallback Profile, Depends upon:\nPartition", "value": 1}, {"id": "Intercompany Media Services Exclusion Group", "label": "Intercompany Media Services Exclusion Group", "shape": "dot", "title": "Intercompany Media Services Exclusion Group, Depends upon:\n", "value": 0}, {"id": "Intercompany Media Services Learned Route", "label": "Intercompany Media Services Learned Route", "shape": "dot", "title": "Intercompany Media Services Learned Route, Depends upon:\n", "value": 0}, {"id": "Vpn Profile", "label": "Vpn Profile", "shape": "dot", "title": "Vpn Profile, Depends upon:\n", "value": 0}, {"id": "Vpn Gateway", "label": "Vpn Gateway", "shape": "dot", "title": "Vpn Gateway, Depends upon:\n", "value": 0}, {"id": "Vpn Group", "label": "Vpn Group", "shape": "dot", "title": "Vpn Group, Depends upon:\nVpn Gateway", "value": 1}, {"id": "Emcc Feature Configuration", "label": "Emcc Feature Configuration", "shape": "dot", "title": "Emcc Feature Configuration, Depends upon:\nGeo Location Filter", "value": 1}, {"id": "Intercompany Media Services Feature Configuration", "label": "Intercompany Media Services Feature Configuration", "shape": "dot", "title": "Intercompany Media Services Feature Configuration, Depends upon:\n", "value": 0}, {"id": "Fallback Feature Configuration", "label": "Fallback Feature Configuration", "shape": "dot", "title": "Fallback Feature Configuration, Depends upon:\n", "value": 0}, {"id": "Vpn Feature Configuration", "label": "Vpn Feature Configuration", "shape": "dot", "title": "Vpn Feature Configuration, Depends upon:\n", "value": 0}, {"id": "Called Party Tracing", "label": "Called Party Tracing", "shape": "dot", "title": "Called Party Tracing, Depends upon:\n", "value": 0}, {"id": "Directory Number Alias Lookup And Sync", "label": "Directory Number Alias Lookup And Sync", "shape": "dot", "title": "Directory Number Alias Lookup And Sync, Depends upon:\n", "value": 0}, {"id": "Call Control Agent Profile", "label": "Call Control Agent Profile", "shape": "dot", "title": "Call Control Agent Profile, Depends upon:\n", "value": 0}, {"id": "Infrastructure Device", "label": "Infrastructure Device", "shape": "dot", "title": "Infrastructure Device, Depends upon:\n", "value": 0}]);
+        edges = new vis.DataSet([{"from": "Cisco Unified Communications Manager", "to": "Server", "value": 1}, {"from": "Cisco Unified Communications Manager", "to": "Location Bandwidth Manager Group", "value": 1}, {"from": "Cisco Unified Communications Manager Group", "to": "Phone Ntp Reference", "value": 1}, {"from": "Device Pool", "to": "Cisco Unified Communications Manager Group", "value": 1}, {"from": "Device Pool", "to": "Date Time Group", "value": 1}, {"from": "Device Pool", "to": "Location", "value": 1}, {"from": "Device Pool", "to": "Region", "value": 1}, {"from": "Device Pool", "to": "Physical Location", "value": 1}, {"from": "Device Pool", "to": "Device Mobility Group", "value": 1}, {"from": "Device Pool", "to": "Srst", "value": 1}, {"from": "Device Pool", "to": "Geo Location Filter", "value": 1}, {"from": "Device Pool", "to": "Calling Search Space", "value": 1}, {"from": "Device Pool", "to": "Aar Group", "value": 1}, {"from": "Device Pool", "to": "Route Group", "value": 1}, {"from": "Device Pool", "to": "Media Resource Group List", "value": 1}, {"from": "Device Pool", "to": "Intercompany Media Services Enrolled Group", "value": 1}, {"from": "Enterprise Parameters", "to": "Mlpp Domain", "value": 1}, {"from": "Enterprise Parameters", "to": "Geo Location Configuration", "value": 1}, {"from": "Enterprise Parameters", "to": "Feature Control Policy", "value": 1}, {"from": "Region", "to": "Audio Codec Preference List", "value": 1}, {"from": "Service Parameters", "to": "Server", "value": 1}, {"from": "Ldap Directory", "to": "Ldap System", "value": 1}, {"from": "Ldap Directory", "to": "Ldap Custom Filter", "value": 1}, {"from": "Resource Priority Namespace List", "to": "Resource Priority Namespace Network Domain", "value": 1}, {"from": "Location Bandwidth Manager Group", "to": "Server", "value": 1}, {"from": "Ldap Search", "to": "Ldap Custom Filter", "value": 1}, {"from": "Ldap Search", "to": "Uc Services", "value": 1}, {"from": "Calling Search Space", "to": "Partition", "value": 1}, {"from": "Partition", "to": "Time Schedule", "value": 1}, {"from": "Time Schedule", "to": "Time Period", "value": 1}, {"from": "Translation Pattern", "to": "Partition", "value": 1}, {"from": "Translation Pattern", "to": "Calling Search Space", "value": 1}, {"from": "Translation Pattern", "to": "Route Filter", "value": 1}, {"from": "Translation Pattern", "to": "Resource Priority Namespace Network Domain", "value": 1}, {"from": "Call Park", "to": "Partition", "value": 1}, {"from": "Call Pickup Group", "to": "Partition", "value": 1}, {"from": "Directory Number", "to": "Presence Group", "value": 1}, {"from": "Directory Number", "to": "Calling Search Space", "value": 1}, {"from": "Directory Number", "to": "Partition", "value": 1}, {"from": "Directory Number", "to": "Aar Group", "value": 1}, {"from": "Directory Number", "to": "Call Pickup Group", "value": 1}, {"from": "Directory Number", "to": "Voicemail Profile", "value": 1}, {"from": "Meet-Me Number / Pattern", "to": "Partition", "value": 1}, {"from": "Directed Call Park", "to": "Partition", "value": 1}, {"from": "Directed Call Park", "to": "Calling Search Space", "value": 1}, {"from": "Line Group", "to": "Partition", "value": 1}, {"from": "Line Group", "to": "Directory Number", "value": 1}, {"from": "Line Group", "to": "Gateway", "value": 1}, {"from": "Line Group", "to": "Device Profile", "value": 1}, {"from": "Line Group", "to": "Cti Route Point", "value": 1}, {"from": "Line Group", "to": "Phone", "value": 1}, {"from": "Line Group", "to": "Remote Destination Profile", "value": 1}, {"from": "Line Group", "to": "Voicemail Profile", "value": 1}, {"from": "Route Group", "to": "Trunk", "value": 1}, {"from": "Route Group", "to": "Gateway", "value": 1}, {"from": "Hunt List", "to": "Line Group", "value": 1}, {"from": "Hunt List", "to": "Cisco Unified Communications Manager Group", "value": 1}, {"from": "Route List", "to": "Route Group", "value": 1}, {"from": "Route List", "to": "Cisco Unified Communications Manager Group", "value": 1}, {"from": "Hunt Pilot", "to": "Calling Search Space", "value": 1}, {"from": "Hunt Pilot", "to": "Partition", "value": 1}, {"from": "Hunt Pilot", "to": "Route Filter", "value": 1}, {"from": "Hunt Pilot", "to": "Aar Group", "value": 1}, {"from": "Hunt Pilot", "to": "Call Pickup Group", "value": 1}, {"from": "Hunt Pilot", "to": "Hunt List", "value": 1}, {"from": "Intercom Route Partition", "to": "Time Schedule", "value": 1}, {"from": "Intercom Css", "to": "Intercom Route Partition", "value": 1}, {"from": "Access List", "to": "End User", "value": 1}, {"from": "Access List", "to": "Directory Number", "value": 1}, {"from": "Route Pattern", "to": "Resource Priority Namespace Network Domain", "value": 1}, {"from": "Route Pattern", "to": "Partition", "value": 1}, {"from": "Route Pattern", "to": "Route Filter", "value": 1}, {"from": "Route Pattern", "to": "Route List", "value": 1}, {"from": "Route Pattern", "to": "Trunk", "value": 1}, {"from": "Route Pattern", "to": "Gateways", "value": 1}, {"from": "Called Party Transformation Pattern", "to": "Partition", "value": 1}, {"from": "Called Party Transformation Pattern", "to": "Route Filter", "value": 1}, {"from": "Sip Route Pattern", "to": "Partition", "value": 1}, {"from": "Sip Route Pattern", "to": "Route Group", "value": 1}, {"from": "Sip Route Pattern", "to": "Route List", "value": 1}, {"from": "Sip Route Pattern", "to": "Trunk", "value": 1}, {"from": "Intercom Directory Number (Unassigned)", "to": "Presence Group", "value": 1}, {"from": "Intercom Directory Number (Unassigned)", "to": "Intercom Route Partition", "value": 1}, {"from": "Intercom Directory Number (Unassigned)", "to": "Intercom Css", "value": 1}, {"from": "Intercom Directory Number (Unassigned)", "to": "Phone", "value": 1}, {"from": "Intercom Directory Number (Unassigned)", "to": "Device Profile", "value": 1}, {"from": "Intercom Translation Pattern", "to": "Intercom Route Partition", "value": 1}, {"from": "Intercom Translation Pattern", "to": "Intercom Css", "value": 1}, {"from": "Intercom Translation Pattern", "to": "Route Filter", "value": 1}, {"from": "Calling Party Transformation Pattern", "to": "Partition", "value": 1}, {"from": "Calling Party Transformation Pattern", "to": "Route Filter", "value": 1}, {"from": "Requesting Services", "to": "Ccd Partition", "value": 1}, {"from": "Requesting Services", "to": "Trunk", "value": 1}, {"from": "Hosted Dn Patterns", "to": "Hosted Dn Group", "value": 1}, {"from": "Advertising Services", "to": "Hosted Dn Group", "value": 1}, {"from": "Advertising Services", "to": "Hosted Dn Patterns", "value": 1}, {"from": "Advertising Services", "to": "Trunk", "value": 1}, {"from": "External Call Control Profile", "to": "Calling Search Space", "value": 1}, {"from": "External Call Control Profile", "to": "Intercom Css", "value": 1}, {"from": "Mobility Profile", "to": "Partition", "value": 1}, {"from": "Mobility Profile", "to": "Enterprise Feature Access Configuration", "value": 1}, {"from": "Handoff Configuration", "to": "Partition", "value": 1}, {"from": "Enterprise Feature Access Configuration", "to": "Partition", "value": 1}, {"from": "Conference Now", "to": "Partition", "value": 1}, {"from": "Annunciator", "to": "Location", "value": 1}, {"from": "Annunciator", "to": "Device Pool", "value": 1}, {"from": "Conference Bridge", "to": "Location", "value": 1}, {"from": "Conference Bridge", "to": "Device Pool", "value": 1}, {"from": "Conference Bridge", "to": "Trunk", "value": 1}, {"from": "Conference Bridge", "to": "Common Device Configuration", "value": 1}, {"from": "Media Resource Group", "to": "Annunciator", "value": 1}, {"from": "Media Resource Group", "to": "Conference Bridge", "value": 1}, {"from": "Media Resource Group", "to": "Music On Hold", "value": 1}, {"from": "Media Resource Group", "to": "Media Termination Point", "value": 1}, {"from": "Media Resource Group", "to": "Ivr", "value": 1}, {"from": "Media Resource Group List", "to": "Media Resource Group", "value": 1}, {"from": "Media Termination Point", "to": "Device Pool", "value": 1}, {"from": "Transcoder", "to": "Device Pool", "value": 1}, {"from": "Transcoder", "to": "Common Device Configuration", "value": 1}, {"from": "Music On Hold Server", "to": "Device Pool", "value": 1}, {"from": "Music On Hold Server", "to": "Location", "value": 1}, {"from": "Mobile Voice Access", "to": "Partition", "value": 1}, {"from": "Voh Server", "to": "Trunk", "value": 1}, {"from": "Ivr", "to": "Device Pool", "value": 1}, {"from": "Ivr", "to": "Location", "value": 1}, {"from": "Application User", "to": "Presence Group", "value": 1}, {"from": "Application User", "to": "Access Control Group", "value": 1}, {"from": "Application User", "to": "Role", "value": 1}, {"from": "Application User", "to": "Application User Capf Profile", "value": 1}, {"from": "Application User", "to": "Credential Policy", "value": 1}, {"from": "Application User", "to": "Cti Route Point", "value": 1}, {"from": "Application User", "to": "Phone", "value": 1}, {"from": "Access Control Group", "to": "Role", "value": 1}, {"from": "Access Control Group", "to": "End User", "value": 1}, {"from": "Cedential Policy Default", "to": "Credential Policy", "value": 1}, {"from": "End User", "to": "Presence Group", "value": 1}, {"from": "End User", "to": "Calling Search Space", "value": 1}, {"from": "End User", "to": "Role", "value": 1}, {"from": "End User", "to": "Credential Policy", "value": 1}, {"from": "End User", "to": "End User Capf Profile", "value": 1}, {"from": "End User", "to": "Uc Services", "value": 1}, {"from": "End User", "to": "Service Profile", "value": 1}, {"from": "End User", "to": "User Profile", "value": 1}, {"from": "End User", "to": "Phone", "value": 1}, {"from": "Service Profile", "to": "Uc Services", "value": 1}, {"from": "Self Provioning", "to": "Application User", "value": 1}, {"from": "Self Provioning", "to": "Cti Route Point", "value": 1}, {"from": "Feature Group Template", "to": "Service Profile", "value": 1}, {"from": "Feature Group Template", "to": "User Profile", "value": 1}, {"from": "Universal Device Template", "to": "Device Pool", "value": 1}, {"from": "Universal Device Template", "to": "Location", "value": 1}, {"from": "Universal Device Template", "to": "Security Profile", "value": 1}, {"from": "Universal Device Template", "to": "Presence Group", "value": 1}, {"from": "Universal Device Template", "to": "Calling Search Space", "value": 1}, {"from": "Universal Device Template", "to": "Partition", "value": 1}, {"from": "Universal Device Template", "to": "Time Period", "value": 1}, {"from": "Universal Device Template", "to": "Time Schedule", "value": 1}, {"from": "Universal Device Template", "to": "Aar Group", "value": 1}, {"from": "Universal Device Template", "to": "Call Pickup Group", "value": 1}, {"from": "Universal Device Template", "to": "Sip Dial Rules", "value": 1}, {"from": "Universal Device Template", "to": "Intercom Route Partition", "value": 1}, {"from": "Universal Device Template", "to": "Intercom Css", "value": 1}, {"from": "Universal Device Template", "to": "Access List", "value": 1}, {"from": "Universal Device Template", "to": "Mobility Profile", "value": 1}, {"from": "Universal Device Template", "to": "Media Resource Group List", "value": 1}, {"from": "Universal Device Template", "to": "End User", "value": 1}, {"from": "Universal Device Template", "to": "Softkey Template", "value": 1}, {"from": "Universal Device Template", "to": "Gatekeeper", "value": 1}, {"from": "Universal Device Template", "to": "Sip Profile", "value": 1}, {"from": "Universal Device Template", "to": "Phone Services", "value": 1}, {"from": "Universal Device Template", "to": "Phone Button Template", "value": 1}, {"from": "Universal Device Template", "to": "Common Phone Profile", "value": 1}, {"from": "Universal Device Template", "to": "Device Profile", "value": 1}, {"from": "Universal Device Template", "to": "Common Device Configuration", "value": 1}, {"from": "Universal Device Template", "to": "Recording Profile", "value": 1}, {"from": "Universal Device Template", "to": "Feature Control Policy", "value": 1}, {"from": "Universal Device Template", "to": "Wi-Fi Hotspot Profile", "value": 1}, {"from": "Universal Line Template", "to": "Presence Group", "value": 1}, {"from": "Universal Line Template", "to": "Calling Search Space", "value": 1}, {"from": "Universal Line Template", "to": "Partition", "value": 1}, {"from": "Universal Line Template", "to": "Aar Group", "value": 1}, {"from": "Universal Line Template", "to": "Call Pickup Group", "value": 1}, {"from": "Universal Line Template", "to": "Voicemail Profile", "value": 1}, {"from": "Trunk", "to": "Device Pool", "value": 1}, {"from": "Trunk", "to": "Location", "value": 1}, {"from": "Trunk", "to": "Security Profile", "value": 1}, {"from": "Trunk", "to": "Presence Group", "value": 1}, {"from": "Trunk", "to": "Mlpp Domain", "value": 1}, {"from": "Trunk", "to": "Geo Location Filter", "value": 1}, {"from": "Trunk", "to": "Calling Search Space", "value": 1}, {"from": "Trunk", "to": "Aar Group", "value": 1}, {"from": "Trunk", "to": "Media Resource Group List", "value": 1}, {"from": "Trunk", "to": "Gatekeeper", "value": 1}, {"from": "Trunk", "to": "Sip Profile", "value": 1}, {"from": "Trunk", "to": "Common Device Configuration", "value": 1}, {"from": "Trunk", "to": "Sip Normalization Script", "value": 1}, {"from": "Trunk", "to": "Intercompany Media Services E.164 Transformation", "value": 1}, {"from": "Sip Profile", "to": "Resource Priority Namespace List", "value": 1}, {"from": "Sip Profile", "to": "Sdp Transparency Profile", "value": 1}, {"from": "Common Phone Profile", "to": "Wi-Fi Hotspot Profile", "value": 1}, {"from": "Common Phone Profile", "to": "Feature Control Policy", "value": 1}, {"from": "Gateway", "to": "Cisco Communications Manager Group", "value": 1}, {"from": "Gateway", "to": "Device Pool", "value": 1}, {"from": "Gateway", "to": "Location", "value": 1}, {"from": "Gateway", "to": "Presence Group", "value": 1}, {"from": "Gateway", "to": "Mlpp Domain", "value": 1}, {"from": "Gateway", "to": "Geo Location Filter", "value": 1}, {"from": "Gateway", "to": "Calling Search Space", "value": 1}, {"from": "Gateway", "to": "Partition", "value": 1}, {"from": "Gateway", "to": "Aar Group", "value": 1}, {"from": "Gateway", "to": "Call Pickup Group", "value": 1}, {"from": "Gateway", "to": "Media Resource Group List", "value": 1}, {"from": "Gateway", "to": "End User", "value": 1}, {"from": "Gateway", "to": "Phone Button Template", "value": 1}, {"from": "Gateway", "to": "Common Phone Profile", "value": 1}, {"from": "Gateway", "to": "Common Device Configuration", "value": 1}, {"from": "Gateway", "to": "Recording Profile", "value": 1}, {"from": "Gateway", "to": "Voicemail Profile", "value": 1}, {"from": "Gateway", "to": "Intercompany Media Services E.164 Transformation", "value": 1}, {"from": "Device Defaults", "to": "Device Pool", "value": 1}, {"from": "Device Profile", "to": "Presence Group", "value": 1}, {"from": "Device Profile", "to": "Mlpp Domain", "value": 1}, {"from": "Device Profile", "to": "Calling Search Space", "value": 1}, {"from": "Device Profile", "to": "Partition", "value": 1}, {"from": "Device Profile", "to": "Call Pickup Group", "value": 1}, {"from": "Device Profile", "to": "Intercom Route Partition", "value": 1}, {"from": "Device Profile", "to": "Intercom Css", "value": 1}, {"from": "Device Profile", "to": "Media Resource Group List", "value": 1}, {"from": "Device Profile", "to": "End User", "value": 1}, {"from": "Device Profile", "to": "Softkey Template", "value": 1}, {"from": "Device Profile", "to": "Phone Button Template", "value": 1}, {"from": "Device Profile", "to": "Feature Control Policy", "value": 1}, {"from": "Common Device Configuration", "to": "Mlpp Domain", "value": 1}, {"from": "Common Device Configuration", "to": "Softkey Template", "value": 1}, {"from": "Cti Route Point", "to": "Device Pool", "value": 1}, {"from": "Cti Route Point", "to": "Location", "value": 1}, {"from": "Cti Route Point", "to": "Presence Group", "value": 1}, {"from": "Cti Route Point", "to": "Calling Search Space", "value": 1}, {"from": "Cti Route Point", "to": "Partition", "value": 1}, {"from": "Cti Route Point", "to": "Aar Group", "value": 1}, {"from": "Cti Route Point", "to": "Media Resource Group List", "value": 1}, {"from": "Cti Route Point", "to": "Voicemail Profile", "value": 1}, {"from": "Phone", "to": "Device Pool", "value": 1}, {"from": "Phone", "to": "Location", "value": 1}, {"from": "Phone", "to": "Presence Group", "value": 1}, {"from": "Phone", "to": "Mlpp Domain", "value": 1}, {"from": "Phone", "to": "Calling Search Space", "value": 1}, {"from": "Phone", "to": "Partition", "value": 1}, {"from": "Phone", "to": "Time Period", "value": 1}, {"from": "Phone", "to": "Time Schedule", "value": 1}, {"from": "Phone", "to": "Aar Group", "value": 1}, {"from": "Phone", "to": "Call Pickup Group", "value": 1}, {"from": "Phone", "to": "Sip Dial Rules", "value": 1}, {"from": "Phone", "to": "Intercom Route Partition", "value": 1}, {"from": "Phone", "to": "Intercom Css", "value": 1}, {"from": "Phone", "to": "Access List", "value": 1}, {"from": "Phone", "to": "Mobility Profile", "value": 1}, {"from": "Phone", "to": "Media Resource Group List", "value": 1}, {"from": "Phone", "to": "Softkey Template", "value": 1}, {"from": "Phone", "to": "Gatekeeper", "value": 1}, {"from": "Phone", "to": "Sip Profile", "value": 1}, {"from": "Phone", "to": "Phone Services", "value": 1}, {"from": "Phone", "to": "Phone Button Template", "value": 1}, {"from": "Phone", "to": "Common Phone Profile", "value": 1}, {"from": "Phone", "to": "Device Profile", "value": 1}, {"from": "Phone", "to": "Common Device Configuration", "value": 1}, {"from": "Phone", "to": "Recording Profile", "value": 1}, {"from": "Phone", "to": "Feature Control Policy", "value": 1}, {"from": "Phone", "to": "Voicemail Profile", "value": 1}, {"from": "Recording Profile", "to": "Calling Search Space", "value": 1}, {"from": "Remote Destination", "to": "Partition", "value": 1}, {"from": "Remote Destination", "to": "Access List", "value": 1}, {"from": "Remote Destination", "to": "Mobility Profile", "value": 1}, {"from": "Remote Destination", "to": "End User", "value": 1}, {"from": "Remote Destination", "to": "Phone", "value": 1}, {"from": "Remote Destination", "to": "Remote Destination Profile", "value": 1}, {"from": "Remote Destination Profile", "to": "Device Pool", "value": 1}, {"from": "Remote Destination Profile", "to": "Presence Group", "value": 1}, {"from": "Remote Destination Profile", "to": "Calling Search Space", "value": 1}, {"from": "Remote Destination Profile", "to": "Partition", "value": 1}, {"from": "Remote Destination Profile", "to": "Aar Group", "value": 1}, {"from": "Remote Destination Profile", "to": "Call Pickup Group", "value": 1}, {"from": "Remote Destination Profile", "to": "End User", "value": 1}, {"from": "Remote Destination Profile", "to": "Voicemail Profile", "value": 1}, {"from": "Default Device Profile", "to": "Mlpp Domain", "value": 1}, {"from": "Default Device Profile", "to": "Calling Search Space", "value": 1}, {"from": "Default Device Profile", "to": "Softkey Template", "value": 1}, {"from": "Default Device Profile", "to": "Phone Button Template", "value": 1}, {"from": "Default Device Profile", "to": "Feature Control Policy", "value": 1}, {"from": "Wireless Lan Profile Group", "to": "Wireless Lan Profile", "value": 1}, {"from": "Wireless Lan Profile", "to": "Network Access Profile", "value": 1}, {"from": "Message Waiting Indicator", "to": "Partition", "value": 1}, {"from": "Message Waiting Indicator", "to": "Calling Search Space", "value": 1}, {"from": "Voice Mail Pilot", "to": "Calling Search Space", "value": 1}, {"from": "Voicemail Profile", "to": "Voicemail Pilot", "value": 1}, {"from": "Voice Mail Port", "to": "Device Pool", "value": 1}, {"from": "Voice Mail Port", "to": "Location", "value": 1}, {"from": "Voice Mail Port", "to": "Calling Search Space", "value": 1}, {"from": "Voice Mail Port", "to": "Aar Group", "value": 1}, {"from": "Voice Mail Port", "to": "Common Device Configuration", "value": 1}, {"from": "Saf Forwarder", "to": "Cisco Unified Communications Manager", "value": 1}, {"from": "Saf Forwarder", "to": "Saf Security Profile", "value": 1}, {"from": "Emcc Intercluster Service Profile", "to": "Trunk", "value": 1}, {"from": "Intercompany Media Engine Server Connection", "to": "Application User", "value": 1}, {"from": "Intercompany Media Service", "to": "Trunk", "value": 1}, {"from": "Intercompany Media Service", "to": "Intercompany Media Engine Server Connection", "value": 1}, {"from": "Intercompany Media Service", "to": "Intercompany Media Service Trust Group", "value": 1}, {"from": "Intercompany Media Service", "to": "Intercompany Media Services Trust Element", "value": 1}, {"from": "Intercompany Media Service", "to": "Intercompany Media Services Enrolled Pattern", "value": 1}, {"from": "Intercompany Media Service", "to": "Intercompany Media Services Enrolled Group", "value": 1}, {"from": "Intercompany Media Service", "to": "Intercompany Media Services Firewall", "value": 1}, {"from": "Intercompany Media Service", "to": "Intercompany Media Services Exclusion Number", "value": 1}, {"from": "Intercompany Media Services Trust Element", "to": "Intercompany Media Service Trust Group", "value": 1}, {"from": "Intercompany Media Services Enrolled Pattern", "to": "Intercompany Media Services Enrolled Group", "value": 1}, {"from": "Intercompany Media Services Enrolled Group", "to": "Fallback Profile", "value": 1}, {"from": "Fallback Profile", "to": "Partition", "value": 1}, {"from": "Vpn Group", "to": "Vpn Gateway", "value": 1}, {"from": "Emcc Feature Configuration", "to": "Geo Location Filter", "value": 1}, {"from": "Intercompany Media Services Exclusion Number", "to": "Intercompany Media Services Exclusion Group", "value": 1}, {"from": "Intercompany Media Services E.164 Transformation", "to": "Calling Search Space", "value": 1}, {"from": "Intercompany Media Services E.164 Transformation", "to": "Intercom Css", "value": 1}, {"from": "Intercompany Media Services E.164 Transformation", "to": "Transformation Profile", "value": 1}]);
+
+        nodeColors = {};
+          allNodes = nodes.get({ returnType: "Object" });
+          for (var nodeId in allNodes) {
+            nodeColors[nodeId] = allNodes[nodeId].color;
+          }
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"nodes": {"borderWidth": 1, "borderWidthSelected": 3, "opacity": 1, "size": 40, "font": {"size": 30}, "color": {"background": "rgba(0,188,235,1)", "highlight": {"background": "rgba(13,39,77,1)"}, "hover": {"background": "rgba(251,171,44,1)"}}}, "edges": {"arrows": {"to": {"enabled": true}}, "color": {"color": "rgba(189,195,199,1)", "highlight": "rgba(13,39,77,1)", "hover": "rgba(251,171,44,1)", "inherit": "both"}, "selfReference": {"size": 22, "angle": 0.7853981633974483}, "smooth": {"forceDirection": "none"}}, "interaction": {"hideEdgesOnDrag": true, "hideEdgesOnZoom": true, "hideNodesOnDrag": false, "hover": true, "keyboard": {"enabled": true}, "multiselect": false, "navigationButtons": true}, "physics": {"forceAtlas2Based": {"gravitationalConstant": -69, "springLength": 40, "springConstant": 0.065, "damping": 0.8, "avoidOverlap": 0.2}, "maxVelocity": 30, "minVelocity": 0.5, "solver": "forceAtlas2Based"}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+          network.on("click", neighbourhoodHighlight);
+        
+
+        
+          network.on("selectNode", neighbourhoodHighlight);
+        
+	 
+        
+
+
+        
+        network.on("stabilizationProgress", function(params) {
+      		document.getElementById('loadingBar').removeAttribute("style");
+	        var maxWidth = 496;
+	        var minWidth = 20;
+	        var widthFactor = params.iterations/params.total;
+	        var width = Math.max(minWidth,maxWidth * widthFactor);
+
+	        document.getElementById('bar').style.width = width + 'px';
+	        document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+	    });
+	    network.once("stabilizationIterationsDone", function() {
+	        document.getElementById('text').innerHTML = '100%';
+	        document.getElementById('bar').style.width = '496px';
+	        document.getElementById('loadingBar').style.opacity = 0;
+	        // really clean the dom element
+	        setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+	    });
+        
+
+        return network;
+
+    }
+    function getRequest(){
+      var url_string = window.location.href; // www.test.com?filename=test
+      var url = new URL(url_string);
+      var paramValue = url.searchParams.get("nodeName");
+      var paramValue = url.searchParams.get("nodeName");
+      alert(paramValue)
+    }
+    network = drawGraph();
+
+</script>
+</body><footer class="footer pt-3">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+                <div class="copyright text-center text-sm text-muted text-lg-left">
+                    &copy;
+                    <a href="https://www.cisco.com/" class="font-weight-bold" target="_blank">2018-2022 Cisco Systems. All rights reserved.</a> - Coded by <a target="_blank" href="mailto:ashimis3@cisco.com">A. K. Mishra</a>.
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                    <li class="nav-item">
+                        <a href="https://www.cisco.com/c/en/us/about/help.html" class="nav-link text-muted" target="_blank">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</html>

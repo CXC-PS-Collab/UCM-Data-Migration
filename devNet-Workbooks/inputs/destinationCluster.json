@@ -1,0 +1,9 @@
+{
+    "cucm": "",
+    "username": "",
+    "password": "",
+    "version": "12.5",
+    "configsFolders": [
+        "Test"
+    ]
+}
