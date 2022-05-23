@@ -166,7 +166,7 @@ Unpacking objects: 100% (86/86), 952.36 KiB | 2.36 MiB/s, done.
 python3 -m pip install -r requirements.txt
 ```
 
-> **Task 0.5: Login to CUCM to make sure your access is working**
+> **Task 0.6: Login to CUCM to make sure your access is working**
 
 1. Fire up your web browser and head over to `10.10.20.15`
 2. Login with Username: `devnetxx` & Password: `devnet@123`
@@ -220,7 +220,11 @@ python3 -m pip install -r requirements.txt
 * Learn more about CUCM API's [here](https://developer.cisco.com/docs/axl-developer-guide/)
 * Python Beginners Guide [here](https://www.w3schools.com/python/)
 * Join the DEVWKS-1016 Webex Teams space [here](https://eurl.io/)
-* Add your use-cases to the [UCM Migrations](https://github.com/shwetham09/UCM-Data-Migration/tree/workbooks#automating-ucm-migration) repo
+* Add your use-cases to the [UCM Migrations](https://github.com/shwetham09/UCM-Data-Migration) repo
+* Need more scripts, checkout [supplementary](https://github.com/shwetham09/UCM-Data-Migration/tree/main/supplementary) folder in this repo
 * Fancy a chat?
-    * [Saurabh Khaneja](mailto:sakhanej@cisco.com)
-    * [Shwetha M](mailto:shwm@cisco.com)
+    * [Saurabh Khaneja(sakhanej)](mailto:sakhanej@cisco.com)
+    * [@Shwetha M (shwm)](mailto:shwm@cisco.com)
+    * [@Ashish K. Mishra (ashimis3)](mailto:ashimis3@cisco.com)
+    * [@Guruprasad Bhat (guruprbh)](mailto:guruprbh@cisco.com)
+    * [@Sidharth R Menon (sirmenon)](mailto:sirmenon@cisco.com)

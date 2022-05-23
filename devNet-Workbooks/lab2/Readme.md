@@ -61,12 +61,15 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
 3. Validate SIP Trunks are migrated from Source to Destination. This is done as part of lab setup
 
 > Dependency Tree: Route Pattern
+
 ![image](https://user-images.githubusercontent.com/40081345/169755205-6f4966a4-af10-4580-9da8-fbb933998799.png)
 
 > Dependency Tree: Route List
+
 ![image](https://user-images.githubusercontent.com/40081345/169755500-ae244b84-6087-43bb-b061-bd39efb22743.png)
 
 > Dependency Tree: Route Group
+
 ![image](https://user-images.githubusercontent.com/40081345/169755343-7613817c-f6fe-4bb1-ac73-b05145767d8a.png)
 
 
