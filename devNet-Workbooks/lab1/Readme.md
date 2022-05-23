@@ -1,4 +1,4 @@
-# Automating UCM Migration (Lab Workbooks)
+# Automating UCM Migration (Lab 1)
 **Automation UCM Migration using Collaboration APIs**  
 *DevNet Workshop 2022 - DEVWKS-1016* | [Link to Presentation](xxx.pptx) 
 
@@ -6,13 +6,12 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
 
 
 
-- [Automating UCM Migration (Lab Workbooks)](#automating-ucm-migration-lab-workbooks)
+- [Automating UCM Migration (Lab 1)](#automating-ucm-migration-lab-1)
   - [Lab Readiness](#lab-readiness)
-  - [Lab 1: CSS and Partition](#lab-1-css-and-partition)
+  - [CSS and Partition](#css-and-partition)
     - [Requirements](#requirements)
     - [Data Understanding](#data-understanding)
     - [Migration Approach](#migration-approach)
-  - [Lab 2: Route Pattern and dependencies](#lab-2-route-pattern-and-dependencies)
 
 
 ## Lab Readiness
@@ -42,7 +41,7 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
   - Source Cluster or 11.5 or Source: Points to CUCM 11.5 Cluster
   - Destination Cluster or 12.5 or Destination: Points to CUCM 12.5 Cluster
 
-## Lab 1: CSS and Partition
+## CSS and Partition
 
 > For this lab, start coding in **lab1/lab1-handsOn.py**
 
@@ -67,7 +66,6 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
 
 ### Migration Approach
 > Refer **references/lab1-reference.py** if stuck anywhere
-
 
 1. Read Input files:
    1. **sourceCluster.json**: _This file provides details required to connect to source cluster_ 
@@ -123,12 +121,4 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
 
 > 🥁 **You have successfully completed Lab 1**
 
-> **_Head on to Lab 2 for some more fun..._**
-
-## Lab 2: Route Pattern and dependencies
-
-> **Requirements**
-
-- Migrate all CSS and it's dependency record from Source Cluster (11.5) to Destination Cluster (12.5)
-- While adding Partitions to destination cluster, change the order of Parition
-
+> **_Head on to [Lab 2](link.com) for some more fun..._**

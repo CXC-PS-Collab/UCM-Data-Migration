@@ -209,7 +209,9 @@ python3 -m pip install -r requirements.txt
 
 > 😎 **Let's get some action...**
 
-- Head over to Session Workbooks present [here](https://github.com/shwetham09/UCM-Data-Migration/tree/workbooks/devNet-Workbooks)
+- Head over to Session Workbooks
+  - Lab 1: [CSS and Partition](https://github.com/shwetham09/UCM-Data-Migration/tree/main/devNet-Workbooks/lab1)
+  - Lab 2: [Route Pattern and Dependencies](https://github.com/shwetham09/UCM-Data-Migration/tree/main/devNet-Workbooks/lab2)
 
 ---
 
