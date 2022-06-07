@@ -60,7 +60,7 @@ def write_results(directory, data, dtype):
     return True
 
 with open('logs.txt', 'w') as f:
-    ct = datetime.datetime.now()
+    ct = datetime.now()
     print(ct, ":::", "Process Started", file=f)
 
 

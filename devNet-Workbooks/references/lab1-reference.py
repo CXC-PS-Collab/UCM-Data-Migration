@@ -2,6 +2,8 @@ import json
 import os
 from zeep.exceptions import Fault
 import traceback
+import sys
+sys.path.append("../")
 
 from ciscoaxl import axl
 from common.baseFunctions import *
@@ -47,7 +49,7 @@ def generate_config_patterns():
     for site in sourceClusterInputJson['siteCode']:
         siteSpecificdataFilterDict = {
             "CSSList": [
-                f"{site}_CSS"
+                f"{site}-DEV_CSS"
             ]
         }
 

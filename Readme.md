@@ -50,15 +50,15 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
 
 | Pod | Username | Password   | SiteCode |
 | --- | -------- | ---------- | -------- |
-| #1  | devnet01 | devnet@123 | POD1     |
-| #2  | devnet02 | devnet@123 | POD2     |
-| #3  | devnet03 | devnet@123 | POD3     |
-| #4  | devnet04 | devnet@123 | POD4     |
-| #5  | devnet05 | devnet@123 | POD5     |
-| #6  | devnet06 | devnet@123 | POD6     |
-| #7  | devnet07 | devnet@123 | POD7     |
-| #8  | devnet08 | devnet@123 | POD8     |
-| #9  | devnet09 | devnet@123 | POD9     |
+| #1  | devnet01 | devnet@123 | POD01    |
+| #2  | devnet02 | devnet@123 | POD02    |
+| #3  | devnet03 | devnet@123 | POD03    |
+| #4  | devnet04 | devnet@123 | POD04    |
+| #5  | devnet05 | devnet@123 | POD05    |
+| #6  | devnet06 | devnet@123 | POD06    |
+| #7  | devnet07 | devnet@123 | POD07    |
+| #8  | devnet08 | devnet@123 | POD08    |
+| #9  | devnet09 | devnet@123 | POD09    |
 | #10 | devnet10 | devnet@123 | POD10    |
 | #11 | devnet11 | devnet@123 | POD11    |
 | #12 | devnet12 | devnet@123 | POD12    |
@@ -143,6 +143,11 @@ remote: Total 86 (delta 29), reused 86 (delta 29), pack-reused 0
 Unpacking objects: 100% (86/86), 952.36 KiB | 2.36 MiB/s, done.
  -- ommitted --
 ```
+
+> **Task 0.3.1: Steps to install Git, if not available**
+
+  - Download [Git for Windows](https://git-scm.com/download/win) and follow the installation steps
+  - Dowload [Git for Mac](https://git-scm.com/download/mac) and follow the installation steps
 
 > **Task 0.4: Setup/Start Python Virtual Environment**
   > Install Python Library virtualenv

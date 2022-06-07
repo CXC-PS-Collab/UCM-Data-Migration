@@ -2,6 +2,8 @@ import json
 import os
 from zeep.exceptions import Fault
 import traceback
+import sys
+sys.path.append("../")
 
 from ciscoaxl import axl
 from common.baseFunctions import *
@@ -134,7 +136,7 @@ def export_RP_Dependencies():
 
 def import_RP_Dependencies():
     ## iterate over each site folder and push the configurations
-    for site in sourceClusterInputJson['siteCode']:
+    for site in sourceClusterInputJson['configsFolders']:
         configDirectory = f"{configExportPath}/{site}"
         logPrint(f"Reading Configs from Directory: {configDirectory}. Proceeding...")
         if os.path.exists(configDirectory):
