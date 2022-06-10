@@ -1,7 +1,10 @@
+
 import json
 import os
 from zeep.exceptions import Fault
 import traceback
+import sys
+sys.path.append("../")
 
 from ciscoaxl import axl
 from common.baseFunctions import *
@@ -11,6 +14,12 @@ sourceJsonFile=f"../inputs/sourceCluster.json"
 dataFilterFile=f"getDataFilter.json"
 destinationJsonFile=f"../inputs/destinationCluster.json"
 configExportPath=f"./ConfigExports"
+
+
+
+## Reading import Logic Sheet
+importLogicFile = f"../common/importLogic.json"
+dynamicLogicJson = json.load(open(importLogicFile))
 
 
 ## Reading Source File and Destination File
@@ -47,9 +56,9 @@ def generate_config_patterns():
     for site in sourceClusterInputJson['siteCode']:
         siteSpecificdataFilterDict = {
             "routePatternPartition": [
-                f"{site}_911_PT",
-                f"{site}_International_PT"
-                f"{site}_national_PT"
+                f"{site}-Park_PT",
+                f"{site}_PHNDN_PT",
+                f"{site}_CHK_PT"
             ]
         }
 
@@ -188,9 +197,9 @@ def import_RP_Dependencies():
                 print("Invalid input. Existing..")
                 exit()
             else:
-                if userAccept.lower == "Y":
+                if userAccept == "Y":
                     try:
-                        updateConfigs(configDirectory, ucm_destination,)
+                        updateConfigs(configDirectory, ucm_destination, dynamicLogicJson)
                     except Exception as importExe:
                         logPrint(f"Error Occured while Importing: {importExe}")
                         traceback.print_exc()
@@ -205,12 +214,13 @@ def import_RP_Dependencies():
 
 
 # Step 1
-generate_config_patterns()
+#generate_config_patterns()
 
 # Step 2
-export_RP_Dependencies()
+#export_RP_Dependencies()
 
 # Step 3
-import_RP_Dependencies()
+#import_RP_Dependencies()
+
 
 

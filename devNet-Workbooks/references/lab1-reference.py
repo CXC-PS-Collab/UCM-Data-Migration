@@ -2,6 +2,8 @@ import json
 import os
 from zeep.exceptions import Fault
 import traceback
+import sys
+sys.path.append("../")
 
 from ciscoaxl import axl
 from common.baseFunctions import *
@@ -13,9 +15,16 @@ destinationJsonFile=f"../inputs/destinationCluster.json"
 configExportPath=f"./ConfigExports"
 
 
+## Reading import Logic Sheet
+importLogicFile = f"../common/importLogic.json"
+dynamicLogicJson = json.load(open(importLogicFile))
+
+
 ## Reading Source File and Destination File
 sourceClusterInputJson = json.load(open(sourceJsonFile))
 destinationClusterInputJson = json.load(open(destinationJsonFile))
+
+
 ## Creating Source AXL Object
 ucm_source = axl(
     username=sourceClusterInputJson["username"],
@@ -47,7 +56,9 @@ def generate_config_patterns():
     for site in sourceClusterInputJson['siteCode']:
         siteSpecificdataFilterDict = {
             "CSSList": [
-                f"{site}_CSS"
+                f"{site}-FAX_Modem_CSS",
+                f"{site}-TRK_CSS",
+                f"{site}-DEV_CSS",
             ]
         }
 
@@ -152,7 +163,7 @@ def import_CSS_Partition():
             else:
                 if userAccept == "Y":
                     try:
-                        updateConfigs(configDirectory, ucm_destination,)
+                        updateConfigs(configDirectory, ucm_destination, dynamicLogicJson)
                     except Exception as importExe:
                         logPrint(f"Error Occured while Importing: {importExe}")
                         traceback.print_exc()
@@ -165,10 +176,10 @@ def import_CSS_Partition():
 
 
 # Step 1
-generate_config_patterns()
+#generate_config_patterns()
 
 # Step 2
-export_CSS_Partition()
+#export_CSS_Partition()
 
 # Step 3
-import_CSS_Partition()
+#import_CSS_Partition()

@@ -17,7 +17,6 @@ Version: 0.2
 """
 
 
-import sys
 from pathlib import Path
 import os
 import traceback

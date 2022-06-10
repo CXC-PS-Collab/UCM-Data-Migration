@@ -2,10 +2,16 @@ import json
 import os
 from zeep.exceptions import Fault
 import traceback
-
+import sys
+sys.path.append("../")
 from ciscoaxl import axl
 from common.baseFunctions import *
 from common.importLogic import updateConfigs
+
+
+## Reading import Logic Sheet
+importLogicFile = f"../common/importLogic.json"
+dynamicLogicJson = json.load(open(importLogicFile))
 
 
 ### Read Source and Destination Input JSON's
@@ -122,7 +128,7 @@ def export_CSS_Partition():
 
 def import_CSS_Partition():
     ## iterate over each site folder and push the configurations
-    for site in sourceClusterInputJson['siteCode']:
+    for site in sourceClusterInputJson['configsFolders']:
         configDirectory = f"{configExportPath}/{site}"
         logPrint(f"Reading Configs from Directory: {configDirectory}. Proceeding...")
         if os.path.exists(configDirectory):
