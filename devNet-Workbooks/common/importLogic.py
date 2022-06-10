@@ -5,11 +5,6 @@ import json
 import os
 
 
-## Reading import Logic Sheet
-importLogicFile = f"importLogic.json"
-dynamicLogicJson = json.load(open(importLogicFile))
-
-
 def cleanObject(data):
     # print(data)
     if type(data) == str:
@@ -60,7 +55,8 @@ def updateMRGL(mrgldata,ucm_destination):
         return False
 
 
-def updateConfigs(ConfigPath, ucm_destination):
+def updateConfigs(ConfigPath, ucm_destination,dynamicLogicJson):
+
     for datafieldskey, datafieldsvalue in dynamicLogicJson.items():
         if "exception" not in datafieldsvalue.keys():
             filename = f"{ConfigPath}/{datafieldsvalue['file']}"
@@ -82,7 +78,7 @@ def updateConfigs(ConfigPath, ucm_destination):
                     continue
                 try:
                     resp = getattr(ucm_destination, datafieldsvalue["axlMethod"])(
-                        cleanedInput
+                       cleanedInput
                     )
                     if "duplicate value" in str(resp) or "exists" in str(resp):
                         print(
@@ -97,23 +93,18 @@ def updateConfigs(ConfigPath, ucm_destination):
                     else:
                         print(f"added {cleanedInput[datafieldsvalue['output']]}")
                 except Exception as ex:
-                    print("Exception in AXL Request")
-                    print(ex)
+                    print(f"Exception in AXL Request: {ex}")
         else:
             ## Updating MRGL Members:
-            if datafieldsvalue["file"] == "mediaresourcegrouplist.json":
-                print(f"{datafieldskey} members")
-                filename = f"{ConfigPath}/{datafieldsvalue['file']}"
-                if os.path.exists(filename):
-                    dataentries = json.load(open(filename))
-                    if updateMRGL(dataentries,ucm_destination):
-                        print("MRGL Updated")
-                    else:
-                        print("Error occured while updating")
-            else:
-                print("Exception occured")
-
-
-
-
-
+            try:
+                if datafieldsvalue["file"] == "mediaresourcegrouplist.json":
+                    print(f"{datafieldskey} members")
+                    filename = f"{ConfigPath}/{datafieldsvalue['file']}"
+                    if os.path.exists(filename):
+                        dataentries = json.load(open(filename))
+                        if updateMRGL(dataentries,ucm_destination):
+                            print("MRGL Updated")
+                        else:
+                            print("Error occured while updating")
+            except Exception as ex:
+                print(f"Exception occured: {ex}")

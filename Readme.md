@@ -1,6 +1,6 @@
 # Automating UCM Migration
 **Automation UCM Migration using Collaboration APIs**  
-*DevNet Workshop 2022 - DEVWKS-1016* | [Link to Presentation](xxx.pptx) 
+*DevNet Workshop 2022 - DEVWKS-1016* | [Link to Presentation](CL_DEVWKS1016.pptx)
 
 Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) and how to effectively utilise CUCM APIs' and Python to automate migration task involving provisioning, modification and validation of CUCM Data.
 
@@ -32,36 +32,38 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
 * In order to complete this lab you will need a development workstation with [Python 3.5 and above](https://www.python.org/downloads/) installed.
     * If you are facing issues with installing Python on your system, spin up a [Python container](https://hub.docker.com/_/python) to get started :)
 * Access to a CUCM 11.5 (_Source Cluster_) and CUCM 12.5 (_Destination Cluster_) has been provisioned for you (see below for details).
-* You need to use `Cisco Anyconnect` to connect to above CUCM labs (see below for details).
+* You need to use `Cisco Anyconnect` to connect to CUCM labs (see below for details).
 * We have already populated _Source Cluster_ with dummy dataset. This is done to proceed with devNet workbooks.
 
 ### Logins & Credentials
 
-#### VPN Details
+#### VPN Details 
 
-◦ Address: `devnetsandbox-usw1-reservation.cisco.com:20244`
-◦ Username: `sdmdev`
-◦ Password: `VDCCLVXF` 
+- Session 1: Monday [13th June 2022]
+  - VPN Address: `devnetsandbox-usw1-reservation.cisco.com:20244` 
+
+- Session 2: Wednesday [15th June 2022]
+  - VPN Address: `devnetsandbox-usw1-reservation.cisco.com:20116`
 
 #### CUCM Lab Details
 > **CUCM 11.5 IP (_Source Cluster_):**  10.10.20.15
 
 > **CUCM 12.5 IP (_Destination Cluster_)** 10.10.20.1 
 
-| Pod | Username | Password   | SiteCode |
-| --- | -------- | ---------- | -------- |
-| #1  | devnet01 | devnet@123 | POD01    |
-| #2  | devnet02 | devnet@123 | POD02    |
-| #3  | devnet03 | devnet@123 | POD03    |
-| #4  | devnet04 | devnet@123 | POD04    |
-| #5  | devnet05 | devnet@123 | POD05    |
-| #6  | devnet06 | devnet@123 | POD06    |
-| #7  | devnet07 | devnet@123 | POD07    |
-| #8  | devnet08 | devnet@123 | POD08    |
-| #9  | devnet09 | devnet@123 | POD09    |
-| #10 | devnet10 | devnet@123 | POD10    |
-| #11 | devnet11 | devnet@123 | POD11    |
-| #12 | devnet12 | devnet@123 | POD12    |
+| Pod | CUCM Username/Password | SiteCode | VPN Username/Password |
+| --- | ---------------------- | -------- | --------------------- |
+| #1  | devnet01/devnet@123    | POD01    | collabuser1/VDCCLVXF  |
+| #2  | devnet02/devnet@123    | POD02    | collabuser2/VDCCLVXF  |
+| #3  | devnet03/devnet@123    | POD03    | collabuser3/VDCCLVXF  |
+| #4  | devnet04/devnet@123    | POD04    | collabuser4/VDCCLVXF  |
+| #5  | devnet05/devnet@123    | POD05    | collabuser5/VDCCLVXF  |
+| #6  | devnet06/devnet@123    | POD06    | collabuser6/VDCCLVXF  |
+| #7  | devnet07/devnet@123    | POD07    | collabuser7/VDCCLVXF  |
+| #8  | devnet08/devnet@123    | POD08    | collabuser8/VDCCLVXF  |
+| #9  | devnet09/devnet@123    | POD09    | collabuser9/VDCCLVXF  |
+| #10 | devnet10/devnet@123    | POD10    | collabuser10/VDCCLVXF |
+| #11 | devnet11/devnet@123    | POD11    | collabuser11/VDCCLVXF |
+| #12 | devnet12/devnet@123    | POD12    | collabuser12/VDCCLVXF |
 
 _Please access cucm with your own username/password and access data with your site code only._
 
@@ -177,6 +179,9 @@ python3 -m pip install -r requirements.txt
 2. Login with Username: `devnetxx` & Password: `devnet@123`
 3. Repeat steps (1,2) with 12.5 CUCM Cluster `10.10.20.1`
 
+> **NOTE**
+- For the purpose of this lab, run `setup.sh` script to setup your workstations. This script is only valid for Linux machines
+  
 
 #### Task 2: Understanding Repository
 

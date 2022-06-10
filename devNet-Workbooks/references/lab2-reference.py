@@ -1,3 +1,4 @@
+
 import json
 import os
 from zeep.exceptions import Fault
@@ -13,6 +14,12 @@ sourceJsonFile=f"../inputs/sourceCluster.json"
 dataFilterFile=f"getDataFilter.json"
 destinationJsonFile=f"../inputs/destinationCluster.json"
 configExportPath=f"./ConfigExports"
+
+
+
+## Reading import Logic Sheet
+importLogicFile = f"../common/importLogic.json"
+dynamicLogicJson = json.load(open(importLogicFile))
 
 
 ## Reading Source File and Destination File
@@ -50,7 +57,7 @@ def generate_config_patterns():
         siteSpecificdataFilterDict = {
             "routePatternPartition": [
                 f"{site}-Park_PT",
-                f"{site}_PHNDN_PT"
+                f"{site}_PHNDN_PT",
                 f"{site}_CHK_PT"
             ]
         }
@@ -177,7 +184,7 @@ def export_RP_Dependencies():
 
 def import_RP_Dependencies():
     ## iterate over each site folder and push the configurations
-    for site in sourceClusterInputJson['configsFolders']:
+    for site in sourceClusterInputJson['siteCode']:
         configDirectory = f"{configExportPath}/{site}"
         logPrint(f"Reading Configs from Directory: {configDirectory}. Proceeding...")
         if os.path.exists(configDirectory):
@@ -190,9 +197,9 @@ def import_RP_Dependencies():
                 print("Invalid input. Existing..")
                 exit()
             else:
-                if userAccept.lower == "Y":
+                if userAccept == "Y":
                     try:
-                        updateConfigs(configDirectory, ucm_destination,)
+                        updateConfigs(configDirectory, ucm_destination, dynamicLogicJson)
                     except Exception as importExe:
                         logPrint(f"Error Occured while Importing: {importExe}")
                         traceback.print_exc()
@@ -207,12 +214,13 @@ def import_RP_Dependencies():
 
 
 # Step 1
-generate_config_patterns()
+#generate_config_patterns()
 
 # Step 2
-export_RP_Dependencies()
+#export_RP_Dependencies()
 
 # Step 3
-import_RP_Dependencies()
+#import_RP_Dependencies()
+
 
 

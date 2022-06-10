@@ -1,9 +1,9 @@
 {
-    "cucm": "",
-    "username": "",
-    "password": "",
+    "cucm": "10.10.20.1",
+    "username": "devnetxx",
+    "password": "devnet@123",
     "version": "12.5",
     "configsFolders": [
-        "Test"
+        "PODxx"
     ]
 }

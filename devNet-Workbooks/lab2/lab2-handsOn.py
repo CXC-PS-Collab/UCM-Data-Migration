@@ -9,6 +9,14 @@ from ciscoaxl import axl
 from common.baseFunctions import *
 from common.importLogic import updateConfigs
 
+
+
+## Reading import Logic Sheet
+importLogicFile = f"../common/importLogic.json"
+dynamicLogicJson = json.load(open(importLogicFile))
+
+
+
 ### Read Source and Destination Input JSON's
 sourceJsonFile=f"../inputs/sourceCluster.json"
 destinationJsonFile=f"../inputs/destinationCluster.json"
@@ -173,5 +181,3 @@ export_RP_Dependencies()
 
 # Step 3
 import_RP_Dependencies()
-
-
