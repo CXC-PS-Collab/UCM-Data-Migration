@@ -220,8 +220,8 @@ python3 -m pip install -r requirements.txt
 > 😎 **Let's get some action...**
 
 - Head over to Session Workbooks
-  - Lab 1: [CSS and Partition](https://github.com/shwetham09/UCM-Data-Migration/tree/main/devNet-Workbooks/lab1)
-  - Lab 2: [Route Pattern and Dependencies](https://github.com/shwetham09/UCM-Data-Migration/tree/main/devNet-Workbooks/lab2)
+  - Lab 1: [CSS and Partition](https://github.com/CXC-PS-Collab/UCM-Data-Migration/tree/main/devNet-Workbooks/lab1)
+  - Lab 2: [Route Pattern and Dependencies](https://github.com/CXC-PS-Collab/UCM-Data-Migration/tree/main/devNet-Workbooks/lab2)
 
 ---
 
@@ -229,9 +229,10 @@ python3 -m pip install -r requirements.txt
 
 * Learn more about CUCM API's [here](https://developer.cisco.com/docs/axl-developer-guide/)
 * Python Beginners Guide [here](https://www.w3schools.com/python/)
-* Join the DEVWKS-1016 Webex Teams space [here](https://eurl.io/)
-* Add your use-cases to the [UCM Migrations](https://github.com/shwetham09/UCM-Data-Migration) repo
-* Need more scripts, checkout [supplementary](https://github.com/shwetham09/UCM-Data-Migration/tree/main/supplementary) folder in this repo
+* Join the DEVWKS-1016 Webex space [here](https://ciscolive.ciscoevents.com/ciscolivebot/#DEVWKS-1016)
+* DMT Demo [here](https://app.vidcast.io/share/c39e712e-11eb-4cc8-b7fe-0a8c84ac7da3)
+* Add your use-cases to the [UCM Migrations](https://github.com/CXC-PS-Collab/UCM-Data-Migration) repo
+* Need more scripts, checkout [supplementary](https://github.com/CXC-PS-Collab/UCM-Data-Migration/tree/main/supplementary) folder in this repo
 * Fancy a chat?
     * [Saurabh Khaneja(sakhanej)](mailto:sakhanej@cisco.com)
     * [@Shwetha M (shwm)](mailto:shwm@cisco.com)
