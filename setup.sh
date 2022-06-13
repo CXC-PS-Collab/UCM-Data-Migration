@@ -1,8 +1,8 @@
 echo "Setting up your machine for DEVWKS-1016"
 
-echo "Installing Python3..."
-sudo apt-get update
-sudo apt-get install python3-pip
+# echo "Installing Python3..."
+# sudo apt-get update
+# sudo apt-get install python3-pip
 
 echo "Setting up virtual environment..."
 sudo apt-get install python3-venv
