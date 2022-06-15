@@ -1,6 +1,6 @@
 # Automating UCM Migration (Lab 1)
 **Automation UCM Migration using Collaboration APIs**  
-*DevNet Workshop 2022 - DEVWKS-1016* | [Link to Presentation](xxx.pptx) 
+*DevNet Workshop 2022 - DEVWKS-1016* | [DEVWKS1016.pdf](https://github.com/CXC-PS-Collab/UCM-Data-Migration/files/8893025/DEVWKS1016.pdf)
 
 Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) and how to effectively utilise CUCM APIs' and Python to automate migration task involving provisioning, modification and validation of CUCM Data.
 
