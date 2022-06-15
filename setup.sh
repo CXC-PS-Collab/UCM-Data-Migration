@@ -1,8 +1,8 @@
 echo "Setting up your machine for DEVWKS-1016"
 
 echo "Installing Python3..."
-sudo apt-get update
-sudo apt-get install python3-pip
+#sudo apt-get update
+#sudo apt-get install python3-pip
 
 echo "Setting up virtual environment..."
 sudo apt-get install python3-venv
@@ -14,3 +14,7 @@ python3 -m pip install -r requirements.txt
 deactivate
 
 echo "Setup Completed.. Please run `source DEVWKS/bin/activate` to enter your virtual environment..."
+
+### For DEVNET LAB DURING THE SESSION: USE BELOW COMMANDS
+docker-compose build
+docker-compose run app bash
