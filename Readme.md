@@ -9,8 +9,6 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
   - [Prerequisites](#prerequisites)
     - [General Instructions](#general-instructions)
     - [Logins & Credentials](#logins--credentials)
-      - [VPN Details](#vpn-details)
-      - [CUCM Lab Details](#cucm-lab-details)
     - [Development Environment Setup](#development-environment-setup)
       - [Task 1: Setting up Python Environment](#task-1-setting-up-python-environment)
       - [Task 2: Understanding Repository](#task-2-understanding-repository)
@@ -37,36 +35,7 @@ Learn about [CUCM AXL](https://developer.cisco.com/docs/axl-developer-guide/) an
 
 ### Logins & Credentials
 
-#### VPN Details 
-
-- Session 1: Monday [13th June 2022]
-  - VPN Address: `devnetsandbox-usw1-reservation.cisco.com:20244` 
-
-- Session 2: Wednesday [15th June 2022]
-  - VPN Address: `devnetsandbox-usw1-reservation.cisco.com:20116`
-
-#### CUCM Lab Details
-> **CUCM 11.5 IP (_Source Cluster_):**  10.10.20.15
-
-> **CUCM 12.5 IP (_Destination Cluster_)** 10.10.20.1 
-
-| Pod | CUCM Username/Password | SiteCode | VPN Username/Password |
-| --- | ---------------------- | -------- | --------------------- |
-| #1  | devnet01/devnet@123    | POD01    | collabuser1/VDCCLVXF  |
-| #2  | devnet02/devnet@123    | POD02    | collabuser2/VDCCLVXF  |
-| #3  | devnet03/devnet@123    | POD03    | collabuser3/VDCCLVXF  |
-| #4  | devnet04/devnet@123    | POD04    | collabuser4/VDCCLVXF  |
-| #5  | devnet05/devnet@123    | POD05    | collabuser5/VDCCLVXF  |
-| #6  | devnet06/devnet@123    | POD06    | collabuser6/VDCCLVXF  |
-| #7  | devnet07/devnet@123    | POD07    | collabuser7/VDCCLVXF  |
-| #8  | devnet08/devnet@123    | POD08    | collabuser8/VDCCLVXF  |
-| #9  | devnet09/devnet@123    | POD09    | collabuser9/VDCCLVXF  |
-| #10 | devnet10/devnet@123    | POD10    | collabuser10/VDCCLVXF |
-| #11 | devnet11/devnet@123    | POD11    | collabuser11/VDCCLVXF |
-| #12 | devnet12/devnet@123    | POD12    | collabuser12/VDCCLVXF |
-
-_Please access cucm with your own username/password and access data with your site code only._
-
+- @CiscoLive, we did demo on a lab setup with VPN Details. Those VPN sessions are discontinued and user should use his/her lab setup to test the functionality of the code.
 
 ### Development Environment Setup
 
