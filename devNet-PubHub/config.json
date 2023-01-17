@@ -1,0 +1,50 @@
+{
+  "items": [
+    {
+      "title": "Introduction",
+      "content": "01-intro.md"
+    },
+    {
+      "title": "Environment Setup",
+      "content": "02-setup.md"
+    },
+    {
+      "title": "Lab 1: CSS and Partition",
+      "content": "03-lab1.md"
+    },
+    {
+      "title": "Lab 2: Route Pattern and Dependencies",
+      "content": "04-lab2.md"
+    }
+  ],
+  "config": {
+    "devEnv": {
+      "id": "devenv-base-bootstrap-vpn",
+      "default_content": "src/"
+    },
+    "video": {},
+    "sandbox": {}
+  },
+  "meta": {
+    "slug": "",
+    "time": "90",
+    "tags": [
+      {
+        "title": "Python"
+      },
+      {
+        "title": "Coding"
+      }
+    ],
+    "authors": [
+      {
+        "name": "Matt DeNapoli",
+        "email": "mdenapol@cisco.com"
+      },
+      {
+        "name": "Saurabh Khaneja",
+        "email": "sakhanej@cisco.com"
+      }
+    ]
+  }
+}
