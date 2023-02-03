@@ -33,17 +33,17 @@
         "title": "Python"
       },
       {
-        "title": "Coding"
+        "title": "CUCM"
       }
     ],
     "authors": [
       {
-        "name": "Matt DeNapoli",
-        "email": "mdenapol@cisco.com"
-      },
-      {
         "name": "Saurabh Khaneja",
         "email": "sakhanej@cisco.com"
+      },
+      {
+        "name": "Matt DeNapoli",
+        "email": "mdenapol@cisco.com"
       }
     ]
   }
