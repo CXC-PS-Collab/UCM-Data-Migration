@@ -1,7 +1,7 @@
 {
-    "cucm": "10.10.20.15",
-    "username": "devnetxx",
-    "password": "devnet@123",
+    "cucm": "",
+    "username": "",
+    "password": "",
     "version": "11.5",
     "siteCode": [
         "PODxx"
