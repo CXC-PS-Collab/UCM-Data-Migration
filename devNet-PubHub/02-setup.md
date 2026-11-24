@@ -4,12 +4,12 @@ Great !!! So you have decided to take on this adventure 🥁, but before we get 
 
 - Python 3.x - Provided in this lab browser Environment
 - Access to CUCM Environment through VPN
-  - CUCM 12.5 (_Source Cluster_): ```https://10.10.20.15/```
-  - CUCM 14 (_Destination Cluster_): ```https://10.10.20.1/```
+  - CUCM 12.5 (_Source Cluster_): ```https://```
+  - CUCM 14 (_Destination Cluster_): ```https://```
   - Login Credentials:
-    - ReadOnlyUser: ```devnetro/devnet@123```
-    - AXLUser: ```devnetaxl/devnet@123```
-- CUCM Config Dependency Graph: ```http://10.10.20.50/```
+    - ReadOnlyUser: ``````
+    - AXLUser: ``````
+- CUCM Config Dependency Graph: ```http:///```
 
 # Setting Environment
 
@@ -29,9 +29,9 @@ python3 -m pip install -r requirements.txt
 > Connect to Cisco VPN to access CUCM labs
 
 ```bash
-export VPN_SERVER=devnetsandbox-usw1-reservation.cisco.com:20177
-export VPN_USERNAME=sbxdemouser
-export VPN_PASSWORD=Cisco@123
+export VPN_SERVER=
+export VPN_USERNAME=
+export VPN_PASSWORD=
 
 /usr/local/bin/startvpn.sh
 ```
